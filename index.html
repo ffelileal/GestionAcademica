@@ -6,732 +6,826 @@
     <title>Gestión Académica - Feli</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> 
-    <link rel="icon" type="image/png" href="https://img.icons8.com/external-glyph-geotatah/64/982036/external-academic-knowledge-management-glyph-glyph-geotatah.png">  
-   
-
-
-   
-
-    
-    <style>
-        :root {
-            ---red: #a3223a;
-            ---red-dark: #8b1e32;
-            ---red-light: #c5394f;
-            --bg-light: #f8fafc;
-            --text-dark: #1a202c;
-            --text-gray: #4a5568;
-            --border-light: #e2e8f0;
-        }
-        
+    <link rel="icon" type="image/png" href="https://img.icons8.com/external-glyph-geotatah/64/982036/external-academic-knowledge-management-glyph-glyph-geotatah.png">      <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Montserrat', sans-serif;
-            background: white;
-            color: var(--text-dark);
+            background-color: #ffffff;
+            color: #333;
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         /* Header */
         .header {
-            background: linear-gradient(135deg, var(---red) 0%, var(---red-dark) 100%);
+            background: linear-gradient(135deg, #a3223a, #8a1d30);
             color: white;
-            padding: 2rem 0;
-            box-shadow: 0 4px 20px rgba(163, 34, 58, 0.3);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
         }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
+
         .logo {
-            width: 60px;
-            height: 60px;
-            background: white;
-            border-radius: 50%;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(---red);
+            gap: 15px;
         }
-        
-        .header-text h1 {
+
+        .logo i {
+            font-size: 2.5rem;
+        }
+
+        .logo-text h1 {
             font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 0.25rem;
         }
-        
-        .header-text p {
+
+        .logo-text p {
             opacity: 0.9;
             font-size: 0.9rem;
         }
-        
-        .motivational-section {
-            text-align: right;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .date {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-        }
-        
-        .motivational-message {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
+
         /* Navigation */
         .nav {
             background: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        
-        .nav-buttons {
+
+        .nav-container {
             display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
+            overflow-x: auto;
+            scrollbar-width: none;
         }
-        
-        .nav-btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            background: var(--bg-light);
-            color: var(--text-gray);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .nav-btn:hover {
-            background: var(---red);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .nav-btn.active {
-            background: var(---red);
-            color: white;
-            box-shadow: 0 4px 15px rgba(163, 34, 58, 0.3);
-        }
-        
-        /* Main Content */
-        .main {
-            padding: 2rem 0;
-        }
-        
-        .section {
+
+        .nav-container::-webkit-scrollbar {
             display: none;
         }
-        
+
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #a3223a;
+            background: #f8f9fa;
+        }
+
+        .nav-btn.active {
+            color: #a3223a;
+            border-bottom-color: #a3223a;
+            background: #fff5f5;
+        }
+
+        /* Main Content */
+        .main {
+            padding: 30px 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
         .section.active {
             display: block;
         }
-        
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .section-title i {
-            color: var(---red);
-        }
-        
+
         /* Cards */
         .card {
             background: white;
             border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border-light);
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            border: 1px solid #f0f0f0;
             transition: all 0.3s ease;
         }
-        
+
         .card:hover {
-            box-shadow: 0 8px 30px rgba(163, 34, 58, 0.15);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
-        
+
         .card-header {
             display: flex;
             justify-content: between;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-        
+
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        
+
+        .card-title i {
+            color: #a3223a;
+        }
+
         /* Buttons */
         .btn {
-            padding: 0.75rem 1.5rem;
+            background: #a3223a;
+            color: white;
             border: none;
+            padding: 12px 24px;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
+            font-family: inherit;
+            font-weight: 500;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
             text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #8a1d30;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(163, 34, 58, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
             font-size: 0.9rem;
         }
-        
-        .btn-primary {
-            background: var(---red);
-            color: white;
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
         }
-        
-        .btn-primary:hover {
-            background: var(---red-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(163, 34, 58, 0.3);
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
         }
-        
-        .btn-secondary {
-            background: white;
-            color: var(---red);
-            border: 2px solid var(---red);
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
         }
-        
-        .btn-secondary:hover {
-            background: var(---red);
-            color: white;
+
+        .form-input:focus {
+            outline: none;
+            border-color: #a3223a;
+            box-shadow: 0 0 0 3px rgba(163, 34, 58, 0.1);
         }
-        
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
-        
-        .btn-danger {
-            background: #e53e3e;
-            color: white;
-        }
-        
-        .btn-danger:hover {
-            background: #c53030;
-        }
-        
-        .btn-success {
-            background: #38a169;
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background: #2f855a;
-        }
-        
+
         /* Grid */
         .grid {
             display: grid;
-            gap: 1.5rem;
+            gap: 20px;
         }
-        
+
         .grid-2 {
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
-        
+
         .grid-3 {
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         }
-        
+
         .grid-4 {
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
-        
+
         /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            gap: 20px;
+            margin-bottom: 30px;
         }
-        
+
         .stat-card {
             background: white;
-            padding: 1.5rem;
+            padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(---red);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            border-left: 4px solid #a3223a;
         }
-        
-        .stat-value {
-            font-size: 2rem;
+
+        .stat-number {
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(---red);
-            margin-bottom: 0.5rem;
+            color: #a3223a;
+            margin-bottom: 5px;
         }
-        
+
         .stat-label {
-            color: var(--text-gray);
-            font-size: 0.9rem;
+            color: #666;
             font-weight: 500;
         }
-        
+
         /* Progress Bar */
         .progress-container {
-            background: var(--bg-light);
+            background: #f8f9fa;
             border-radius: 10px;
-            overflow: hidden;
-            height: 20px;
-            margin: 1rem 0;
+            padding: 4px;
+            margin: 15px 0;
         }
-        
+
         .progress-bar {
-            background: linear-gradient(90deg, var(---red), var(---red-light));
-            height: 100%;
+            background: linear-gradient(90deg, #a3223a, #c73650);
+            height: 20px;
+            border-radius: 6px;
             transition: width 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Materia Item */
+        .materia-item {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .materia-item:hover {
+            border-color: #a3223a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .materia-header {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .materia-code {
+            background: #a3223a;
             color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
         }
-        
-        /* Forms */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
+
+        .materia-name {
+            font-size: 1.2rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: #333;
+            margin-bottom: 5px;
         }
-        
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid var(--border-light);
-            border-radius: 8px;
-            font-size: 1rem;
+
+        .materia-note {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #a3223a;
+            margin: 10px 0;
+        }
+
+        .materia-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* Task Item */
+        .task-item {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
             transition: all 0.3s ease;
         }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: var(---red);
-            box-shadow: 0 0 0 3px rgba(163, 34, 58, 0.1);
+
+        .task-item.completed {
+            opacity: 0.7;
+            border-color: #28a745;
         }
-        
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+
+        .task-item.completed .task-name {
+            text-decoration: line-through;
         }
-        
+
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+        }
+
+        .task-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .task-priority {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .priority-alta {
+            background: #dc3545;
+            color: white;
+        }
+
+        .priority-media {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .priority-baja {
+            background: #28a745;
+            color: white;
+        }
+
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Schedule */
+        .schedule-container {
+            overflow-x: auto;
+        }
+
+        .schedule-table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .schedule-table th {
+            background: #a3223a;
+            color: white;
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .schedule-table td {
+            border: 1px solid #e9ecef;
+            padding: 8px;
+            text-align: center;
+            vertical-align: top;
+            height: 60px;
+            position: relative;
+        }
+
+        .schedule-table .time-cell {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .schedule-event {
+            background: #a3223a;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin: 1px 0;
+            cursor: pointer;
+        }
+
         /* Modal */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
         }
-        
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
         .modal-content {
             background: white;
-            margin: 5% auto;
-            padding: 2rem;
             border-radius: 12px;
+            padding: 30px;
             width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
+            max-width: 500px;
+            max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
-        
+
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 25px;
         }
-        
+
         .modal-title {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
+            font-weight: 600;
+            color: #333;
         }
-        
-        .close-btn {
+
+        .modal-close {
             background: none;
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-gray);
-            padding: 0.5rem;
+            color: #666;
+            padding: 5px;
         }
-        
-        .close-btn:hover {
-            color: var(---red);
+
+        .modal-close:hover {
+            color: #333;
         }
-        
-        /* Materia Card */
-        .materia-card {
-            background: white;
+
+        /* Motivational Quote */
+        .quote-card {
+            background: linear-gradient(135deg, #a3223a, #c73650);
+            color: white;
+            text-align: center;
+            padding: 30px;
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(---red);
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
         }
-        
-        .materia-card:hover {
-            box-shadow: 0 8px 30px rgba(163, 34, 58, 0.15);
-            transform: translateY(-2px);
-        }
-        
-        .materia-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-        }
-        
-        .materia-info h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
-        }
-        
-        .materia-code {
-            color: var(--text-gray);
-            font-size: 0.9rem;
+
+        .quote-text {
+            font-size: 1.3rem;
             font-weight: 500;
+            margin-bottom: 10px;
+            font-style: italic;
         }
-        
-        .materia-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .materia-grade {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .grade-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(---red);
-        }
-        
-        .grade-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .status-approved {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-        
-        .status-in-progress {
-            background: #fed7aa;
-            color: #9c4221;
-        }
-        
-        .status-pending {
-            background: #e2e8f0;
-            color: #4a5568;
-        }
-        
-        /* Task Item */
-        .task-item {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(--border-light);
-            transition: all 0.3s ease;
-        }
-        
-        .task-item.completed {
-            opacity: 0.7;
-            text-decoration: line-through;
-            border-left-color: #38a169;
-        }
-        
-        .task-item.high-priority {
-            border-left-color: #e53e3e;
-            background: #fef5e7;
-        }
-        
-        .task-item.medium-priority {
-            border-left-color: #ed8936;
-            background: #fffaf0;
-        }
-        
-        .task-item.low-priority {
-            border-left-color: #38a169;
-            background: #f0fff4;
-        }
-        
-        .task-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-        }
-        
-        .task-info h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
-        }
-        
-        .task-meta {
-            color: var(--text-gray);
+
+        .quote-day {
+            opacity: 0.9;
             font-size: 0.9rem;
         }
-        
-        .task-actions {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        
-        .priority-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .priority-high {
-            background: #fed7d7;
-            color: #c53030;
-        }
-        
-        .priority-medium {
-            background: #feebc8;
-            color: #c05621;
-        }
-        
-        .priority-low {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-        
-        /* Calendar */
-        .calendar {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .calendar-header {
-            background: var(---red);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-        }
-        
-        .calendar-day-header {
-            background: var(--bg-light);
-            padding: 1rem;
-            text-align: center;
-            font-weight: 600;
-            color: var(--text-gray);
-            border-bottom: 1px solid var(--border-light);
-        }
-        
-        .calendar-cell {
-            min-height: 100px;
-            padding: 0.5rem;
-            border-right: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        
-        .calendar-cell:hover {
-            background: var(--bg-light);
-        }
-        
-        .calendar-event {
-            background: var(---red);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-bottom: 0.25rem;
-            cursor: pointer;
-        }
-        
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text-gray);
-        }
-        
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-        
-        .empty-state h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .empty-state p {
-            opacity: 0.8;
-        }
-        
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
                 padding: 0 15px;
             }
-            
+
             .header-content {
-                flex-direction: column;
                 text-align: center;
             }
-            
-            .motivational-section {
-                text-align: center;
-            }
-            
-            .nav-buttons {
+
+            .logo {
                 justify-content: center;
+                margin-bottom: 10px;
             }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
+
             .form-row {
                 grid-template-columns: 1fr;
             }
-            
-            .modal-content {
-                margin: 10% auto;
-                width: 95%;
-                padding: 1.5rem;
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
-            
-            .materia-header,
+
+            .materia-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
             .task-header {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 10px;
             }
-            
-            .materia-actions,
-            .task-actions {
-                justify-content: flex-start;
+
+            .task-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
             }
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .modal-content {
+                padding: 20px;
+                margin: 20px;
             }
         }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
+
+        /* Exam Item */
+        .exam-item {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
         }
-        
+
+        .exam-item:hover {
+            border-color: #a3223a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .exam-type {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .exam-type.parcial {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .exam-type.final {
+            background: #a3223a;
+            color: white;
+        }
+
+        .exam-type.recuperatorio {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .exam-note {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #a3223a;
+            margin: 10px 0;
+        }
+
+        .exam-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .year-section {
+            margin-bottom: 30px;
+        }
+
+        .year-title {
+            background: linear-gradient(135deg, #a3223a, #c73650);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Materia Details */
+        .materia-details {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #a3223a;
+        }
+
+        .materia-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .notas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .nota-item {
+            text-align: center;
+            padding: 8px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        .nota-label {
+            font-size: 0.7rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .nota-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #a3223a;
+        }
+
+        .promedio-final {
+            background: linear-gradient(135deg, #a3223a, #c73650);
+            color: white;
+            border: none;
+        }
+
+        .promedio-final .nota-label {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .promedio-final .nota-value {
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .estado-materia {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .estado-aprobada {
+            background: #28a745;
+            color: white;
+        }
+
+        .estado-regular {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .estado-libre {
+            background: #dc3545;
+            color: white;
+        }
+
+        .estado-cursando {
+            background: #17a2b8;
+            color: white;
+        }
+
         /* Utilities */
         .text-center { text-align: center; }
         .text-right { text-align: right; }
-        .mb-1 { margin-bottom: 0.5rem; }
-        .mb-2 { margin-bottom: 1rem; }
-        .mb-3 { margin-bottom: 1.5rem; }
-        .mt-1 { margin-top: 0.5rem; }
-        .mt-2 { margin-top: 1rem; }
+        .mb-0 { margin-bottom: 0; }
+        .mb-10 { margin-bottom: 10px; }
+        .mb-20 { margin-bottom: 20px; }
+        .mt-20 { margin-top: 20px; }
         .hidden { display: none; }
-        .flex { display: flex; }
-        .flex-1 { flex: 1; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .gap-1 { gap: 0.5rem; }
-        .gap-2 { gap: 1rem; }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #a3223a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -739,19 +833,16 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <div class="header-text">
-                        <h1>Gestión Académica </h1>
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div class="logo-text">
+                        <h1>Gestión Académica UBP</h1>
                         <p>Ingeniería Informática</p>
                     </div>
                 </div>
-                <div class="motivational-section">
-                    <div class="date" id="current-date"></div>
-                    <div class="motivational-message" id="motivational-message"></div>
-                    <div style="font-size: 0.8rem; opacity: 0.8;">💪 ¡Tú puedes con todo!</div>
+                <div class="user-info">
+                    <p><strong>Estudiante:</strong> <span id="studentName">Mi Perfil</span></p>
+                    <p><strong>Legajo:</strong> <span id="studentId">000000</span></p>
                 </div>
             </div>
         </div>
@@ -760,26 +851,24 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="container">
-            <div class="nav-buttons">
+            <div class="nav-container">
                 <button class="nav-btn active" onclick="showSection('dashboard')">
-                    <i class="fas fa-home"></i>
-                    Dashboard
+                    <i class="fas fa-home"></i> Dashboard
                 </button>
                 <button class="nav-btn" onclick="showSection('materias')">
-                    <i class="fas fa-book"></i>
-                    Materias
+                    <i class="fas fa-book"></i> Materias
                 </button>
                 <button class="nav-btn" onclick="showSection('tareas')">
-                    <i class="fas fa-tasks"></i>
-                    Tareas
+                    <i class="fas fa-tasks"></i> Tareas
                 </button>
                 <button class="nav-btn" onclick="showSection('horario')">
-                    <i class="fas fa-calendar"></i>
-                    Horario
+                    <i class="fas fa-calendar"></i> Horario
                 </button>
-                <button class="nav-btn" onclick="generateShortcut()" title="Generar acceso directo al escritorio">
-                    <i class="fas fa-download"></i>
-                    Acceso Directo
+                <button class="nav-btn" onclick="showSection('examenes')">
+                    <i class="fas fa-clipboard-list"></i> Exámenes
+                </button>
+                <button class="nav-btn" onclick="showSection('progreso')">
+                    <i class="fas fa-chart-line"></i> Progreso
                 </button>
             </div>
         </div>
@@ -790,170 +879,183 @@
         <div class="container">
             <!-- Dashboard Section -->
             <section id="dashboard" class="section active">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-chart-line"></i>
-                        Dashboard
-                    </h2>
+                <!-- Motivational Quote -->
+                <div class="quote-card">
+                    <div class="quote-text" id="dailyQuote">¡Bienvenido a tu gestor académico!</div>
+                    <div class="quote-day" id="quoteDay">Cargando frase del día...</div>
                 </div>
 
                 <!-- Stats -->
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-value" id="total-materias">0</div>
-                        <div class="stat-label">Total Materias</div>
+                        <div class="stat-number" id="totalMaterias">0</div>
+                        <div class="stat-label">Materias Totales</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="materias-aprobadas">0</div>
+                        <div class="stat-number" id="materiasAprobadas">0</div>
                         <div class="stat-label">Materias Aprobadas</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="promedio-general">0.0</div>
+                        <div class="stat-number" id="promedioGeneral">0.0</div>
                         <div class="stat-label">Promedio General</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value" id="tareas-pendientes">0</div>
+                        <div class="stat-number" id="tareasPendientes">0</div>
                         <div class="stat-label">Tareas Pendientes</div>
                     </div>
                 </div>
 
-                <!-- Progress -->
-                <div class="card">
-                    <h3 class="card-title">Progreso de la Carrera</h3>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progress-bar" style="width: 0%">0%</div>
-                    </div>
-                    <p id="progress-text">Comienza agregando tus materias para ver tu progreso</p>
-                </div>
-
                 <!-- Recent Activity -->
-                <div class="card mt-2">
-                    <h3 class="card-title">Próximas Tareas</h3>
-                    <div id="upcoming-tasks">
-                        <div class="empty-state">
-                            <i class="fas fa-clipboard-list"></i>
-                            <h3>No hay tareas próximas</h3>
-                            <p>¡Perfecto momento para relajarse!</p>
-                        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-clock"></i>
+                            Actividad Reciente
+                        </h2>
+                    </div>
+                    <div id="recentActivity">
+                        <p style="color: #666; text-align: center; padding: 20px;">
+                            No hay actividad reciente. ¡Comienza agregando materias y tareas!
+                        </p>
                     </div>
                 </div>
             </section>
 
             <!-- Materias Section -->
             <section id="materias" class="section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-book"></i>
-                        Mis Materias
-                    </h2>
-                    <button class="btn btn-primary" onclick="openMateriaModal()">
-                        <i class="fas fa-plus"></i>
-                        Agregar Materia
-                    </button>
-                </div>
-
-                <div id="materias-container">
-                    <div class="empty-state">
-                        <i class="fas fa-book-open"></i>
-                        <h3>No hay materias agregadas</h3>
-                        <p>¡Comienza agregando tu primera materia!</p>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-book"></i>
+                            Mis Materias
+                        </h2>
+                        <button class="btn" onclick="openModal('materiaModal')">
+                            <i class="fas fa-plus"></i>
+                            Agregar Materia
+                        </button>
+                    </div>
+                    <div id="materiasList" class="grid grid-3">
+                        <!-- Materias will be loaded here -->
                     </div>
                 </div>
             </section>
 
             <!-- Tareas Section -->
             <section id="tareas" class="section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-tasks"></i>
-                        Mis Tareas
-                    </h2>
-                    <div class="flex gap-1">
-                        <button class="btn btn-secondary btn-small" onclick="clearCompletedTasks()">
-                            <i class="fas fa-trash"></i>
-                            Limpiar Completadas
-                        </button>
-                        <button class="btn btn-primary" onclick="openTareaModal()">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-tasks"></i>
+                            Mis Tareas
+                        </h2>
+                        <button class="btn" onclick="openModal('tareaModal')">
                             <i class="fas fa-plus"></i>
-                            Nueva Tarea
+                            Agregar Tarea
                         </button>
                     </div>
-                </div>
-
-                <div id="tareas-container">
-                    <div class="empty-state">
-                        <i class="fas fa-clipboard-list"></i>
-                        <h3>No hay tareas pendientes</h3>
-                        <p>¡Perfecto momento para relajarse!</p>
+                    <div id="tareasList">
+                        <!-- Tareas will be loaded here -->
                     </div>
                 </div>
             </section>
 
             <!-- Horario Section -->
             <section id="horario" class="section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-calendar"></i>
-                        Mi Horario
-                    </h2>
-                    <button class="btn btn-primary" onclick="openHorarioModal()">
-                        <i class="fas fa-plus"></i>
-                        Agregar Clase
-                    </button>
-                </div>
-
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <h3>Horario Semanal</h3>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-calendar"></i>
+                            Mi Horario Semanal
+                        </h2>
+                        <button class="btn" onclick="openModal('horarioModal')">
+                            <i class="fas fa-plus"></i>
+                            Agregar Clase
+                        </button>
                     </div>
-                    <div class="calendar-grid">
-                        <div class="calendar-day-header">Lunes</div>
-                        <div class="calendar-day-header">Martes</div>
-                        <div class="calendar-day-header">Miércoles</div>
-                        <div class="calendar-day-header">Jueves</div>
-                        <div class="calendar-day-header">Viernes</div>
-                        <div class="calendar-day-header">Sábado</div>
-                        <div class="calendar-day-header">Domingo</div>
-                        
-                        <!-- Time slots will be generated by JavaScript -->
-                        <div id="calendar-body"></div>
+                    <div class="schedule-container">
+                        <table class="schedule-table" id="scheduleTable">
+                            <!-- Schedule will be generated here -->
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exámenes Section -->
+            <section id="examenes" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-clipboard-list"></i>
+                            Mis Exámenes
+                        </h2>
+                        <button class="btn" onclick="openModal('examenModal')">
+                            <i class="fas fa-plus"></i>
+                            Registrar Examen
+                        </button>
+                    </div>
+                    <div id="examenesList">
+                        <!-- Exámenes will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progreso Section -->
+            <section id="progreso" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <i class="fas fa-chart-line"></i>
+                            Mi Progreso Académico
+                        </h2>
+                    </div>
+                    
+                    <div class="mb-20">
+                        <h3 style="margin-bottom: 10px;">Progreso General de la Carrera</h3>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="careerProgress" style="width: 0%"></div>
+                        </div>
+                        <p style="text-align: center; margin-top: 10px; color: #666;">
+                            <span id="progressText">0% completado</span>
+                        </p>
+                    </div>
+
+                    <div class="grid grid-2">
+                        <div>
+                            <h3 style="margin-bottom: 15px;">Materias por Estado</h3>
+                            <div id="materiasStatus">
+                                <!-- Status will be loaded here -->
+                            </div>
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: 15px;">Distribución de Notas</h3>
+                            <div id="notasDistribution">
+                                <!-- Distribution will be loaded here -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
     </main>
 
+    <!-- Modals -->
     <!-- Materia Modal -->
     <div id="materiaModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="materia-modal-title">Agregar Materia</h2>
-                <button class="close-btn" onclick="closeMateriaModal()">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3 class="modal-title">Agregar Materia</h3>
+                <button class="modal-close" onclick="closeModal('materiaModal')">&times;</button>
             </div>
             <form id="materiaForm">
-                <input type="hidden" id="materia-id">
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Código</label>
-                        <input type="text" id="materia-codigo" class="form-input" placeholder="Ej: INF101" required>
+                        <label class="form-label">Código de la Materia</label>
+                        <input type="text" id="materiaCodigo" class="form-input" placeholder="Ej: INF-101" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Cantidad de Parciales</label>
-                        <select id="cantidad-parciales" class="form-input" onchange="updateParcialesInputs()">
-                            <option value="2">2 Parciales</option>
-                            <option value="3">3 Parciales</option>
-                            <option value="4">4 Parciales</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">📅 Año</label>
-                        <select id="materia-año" class="form-input" required>
-                            <option value="">Seleccionar año</option>
+                        <label class="form-label">Año</label>
+                        <select id="materiaAno" class="form-input" required>
+                            <option value="">Seleccionar año...</option>
                             <option value="1">1er Año</option>
                             <option value="2">2do Año</option>
                             <option value="3">3er Año</option>
@@ -961,67 +1063,53 @@
                             <option value="5">5to Año</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">📚 Cuatrimestre</label>
-                        <select id="materia-cuatrimestre" class="form-input" required>
-                            <option value="">Seleccionar cuatrimestre</option>
-                            <option value="1">1er Cuatrimestre</option>
-                            <option value="2">2do Cuatrimestre</option>
-                            <option value="anual">Anual</option>
-                        </select>
-                    </div>
                 </div>
-                
                 <div class="form-group">
-                    <label class="form-label">🔗 Correlativas</label>
-                    <select id="materia-correlativas" class="form-input" multiple style="height: 100px;">
-                        <!-- Se llenarán dinámicamente -->
+                    <label class="form-label">Cuatrimestre</label>
+                    <select id="materiaCuatrimestre" class="form-input" required>
+                        <option value="">Seleccionar cuatrimestre...</option>
+                        <option value="1">1er Cuatrimestre</option>
+                        <option value="2">2do Cuatrimestre</option>
                     </select>
-                    <small style="color: var(--text-gray); font-size: 0.8rem;">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples materias</small>
-                </div>
-                
-                <!-- Notas de Parciales -->
-                <div class="form-group">
-                    <label class="form-label">📝 Notas de Parciales (1-10)</label>
-                    <div id="parciales-container" class="form-row">
-                        <div class="form-group">
-                            <label class="form-label" style="font-size: 0.9rem; color: var(--text-gray);">Parcial 1</label>
-                            <input type="number" id="parcial-1" class="form-input" min="1" max="10" step="0.1" placeholder="0.0" onchange="calculatePromedio()">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" style="font-size: 0.9rem; color: var(--text-gray);">Parcial 2</label>
-                            <input type="number" id="parcial-2" class="form-input" min="1" max="10" step="0.1" placeholder="0.0" onchange="calculatePromedio()">
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Nota Final -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">🎓 Nota Final (1-10)</label>
-                        <input type="number" id="nota-final" class="form-input" min="1" max="10" step="0.1" placeholder="0.0" onchange="calculatePromedio()">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">📊 Promedio Calculado</label>
-                        <input type="text" id="promedio-calculado" class="form-input" readonly style="background: var(--bg-light); font-weight: 600; color: var(---red);" placeholder="Se calcula automáticamente">
-                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Nombre de la Materia</label>
-                    <input type="text" id="materia-nombre" class="form-input" placeholder="Ej: Programación I" required>
+                    <input type="text" id="materiaNombre" class="form-input" placeholder="Ej: Programación I" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Materia Correlativa (Opcional)</label>
+                    <select id="materiaCorrelativa" class="form-input">
+                        <option value="">Sin correlativa...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notas de Parciales</label>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Parcial 1 (1-10)</label>
+                            <input type="number" id="materiaParcial1" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Parcial 2 (1-10)</label>
+                            <input type="number" id="materiaParcial2" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                        </div>
+                    </div>
+                    <div id="parcialesExtra"></div>
+                    <button type="button" class="btn btn-secondary btn-small" onclick="agregarParcial()" style="margin-top: 10px;">
+                        <i class="fas fa-plus"></i> Agregar Parcial
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Examen Final (1-10)</label>
+                    <input type="number" id="materiaFinal" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Comentarios</label>
-                    <textarea id="materia-comentarios" class="form-input" rows="3" placeholder="Notas adicionales sobre la materia..."></textarea>
+                    <textarea id="materiaComentarios" class="form-input" rows="3" placeholder="Comentarios adicionales..."></textarea>
                 </div>
-                <div class="flex gap-2 mt-2">
-                    <button type="submit" class="btn btn-primary flex-1">
-                        <i class="fas fa-save"></i>
-                        Guardar
-                    </button>
-                    <button type="button" class="btn btn-secondary" onclick="closeMateriaModal()">
-                        Cancelar
-                    </button>
+                <div style="display: flex; gap: 10px; margin-top: 25px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('materiaModal')">Cancelar</button>
+                    <button type="submit" class="btn">Guardar Materia</button>
                 </div>
             </form>
         </div>
@@ -1031,45 +1119,38 @@
     <div id="tareaModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Nueva Tarea</h2>
-                <button class="close-btn" onclick="closeTareaModal()">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3 class="modal-title">Agregar Tarea</h3>
+                <button class="modal-close" onclick="closeModal('tareaModal')">&times;</button>
             </div>
             <form id="tareaForm">
                 <div class="form-group">
                     <label class="form-label">Nombre de la Tarea</label>
-                    <input type="text" id="tarea-nombre" class="form-input" placeholder="Ej: Entrega TP1" required>
+                    <input type="text" id="tareaNombre" class="form-input" placeholder="Ej: Trabajo Práctico 1" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Materia Asociada</label>
+                    <select id="tareaMateria" class="form-input" required>
+                        <option value="">Seleccionar materia...</option>
+                    </select>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Materia</label>
-                        <select id="tarea-materia" class="form-input" required>
-                            <option value="">Seleccionar materia</option>
-                        </select>
+                        <label class="form-label">Fecha Límite</label>
+                        <input type="date" id="tareaFecha" class="form-input" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Prioridad</label>
-                        <select id="tarea-prioridad" class="form-input" required>
-                            <option value="">Seleccionar prioridad</option>
-                            <option value="alta">🔴 Alta</option>
-                            <option value="media">🟡 Media</option>
-                            <option value="baja">🟢 Baja</option>
+                        <select id="tareaPrioridad" class="form-input" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="alta">Alta</option>
+                            <option value="media">Media</option>
+                            <option value="baja">Baja</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Fecha Límite</label>
-                    <input type="datetime-local" id="tarea-fecha" class="form-input" required>
-                </div>
-                <div class="flex gap-2 mt-2">
-                    <button type="submit" class="btn btn-primary flex-1">
-                        <i class="fas fa-save"></i>
-                        Crear Tarea
-                    </button>
-                    <button type="button" class="btn btn-secondary" onclick="closeTareaModal()">
-                        Cancelar
-                    </button>
+                <div style="display: flex; gap: 10px; margin-top: 25px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('tareaModal')">Cancelar</button>
+                    <button type="submit" class="btn">Guardar Tarea</button>
                 </div>
             </form>
         </div>
@@ -1079,334 +1160,645 @@
     <div id="horarioModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Agregar Clase</h2>
-                <button class="close-btn" onclick="closeHorarioModal()">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3 class="modal-title">Agregar Clase</h3>
+                <button class="modal-close" onclick="closeModal('horarioModal')">&times;</button>
             </div>
             <form id="horarioForm">
                 <div class="form-group">
                     <label class="form-label">Materia</label>
-                    <select id="horario-materia" class="form-input" required>
-                        <option value="">Seleccionar materia</option>
+                    <select id="horarioMateria" class="form-input" required>
+                        <option value="">Seleccionar materia...</option>
                     </select>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Día</label>
-                        <select id="horario-dia" class="form-input" required>
-                            <option value="">Seleccionar día</option>
-                            <option value="0">Lunes</option>
-                            <option value="1">Martes</option>
-                            <option value="2">Miércoles</option>
-                            <option value="3">Jueves</option>
-                            <option value="4">Viernes</option>
-                            <option value="5">Sábado</option>
-                            <option value="6">Domingo</option>
+                        <select id="horarioDia" class="form-input" required>
+                            <option value="">Seleccionar día...</option>
+                            <option value="lunes">Lunes</option>
+                            <option value="martes">Martes</option>
+                            <option value="miercoles">Miércoles</option>
+                            <option value="jueves">Jueves</option>
+                            <option value="viernes">Viernes</option>
+                            <option value="sabado">Sábado</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Aula</label>
-                        <input type="text" id="horario-aula" class="form-input" placeholder="Ej: Aula 101">
+                        <input type="text" id="horarioAula" class="form-input" placeholder="Ej: A-101">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Hora Inicio</label>
-                        <input type="time" id="horario-inicio" class="form-input" required>
+                        <input type="time" id="horarioInicio" class="form-input" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Hora Fin</label>
-                        <input type="time" id="horario-fin" class="form-input" required>
+                        <input type="time" id="horarioFin" class="form-input" required>
                     </div>
                 </div>
-                <div class="flex gap-2 mt-2">
-                    <button type="submit" class="btn btn-primary flex-1">
-                        <i class="fas fa-save"></i>
-                        Guardar
+                <div style="display: flex; gap: 10px; margin-top: 25px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('horarioModal')">Cancelar</button>
+                    <button type="submit" class="btn">Guardar Clase</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Examen Modal -->
+    <div id="examenModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Registrar Examen</h3>
+                <button class="modal-close" onclick="closeModal('examenModal')">&times;</button>
+            </div>
+            <form id="examenForm">
+                <div class="form-group">
+                    <label class="form-label">Materia</label>
+                    <select id="examenMateria" class="form-input" required>
+                        <option value="">Seleccionar materia...</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Examen</label>
+                        <select id="examenTipo" class="form-input" required>
+                            <option value="">Seleccionar tipo...</option>
+                            <option value="parcial">Parcial</option>
+                            <option value="final">Final</option>
+                            <option value="recuperatorio">Recuperatorio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha del Examen</label>
+                        <input type="date" id="examenFecha" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nota Obtenida (1-10)</label>
+                    <input type="number" id="examenNota" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Observaciones</label>
+                    <textarea id="examenObservaciones" class="form-input" rows="3" placeholder="Comentarios sobre el examen..."></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 25px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('examenModal')">Cancelar</button>
+                    <button type="submit" class="btn">Guardar Examen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Materia Modal -->
+    <div id="editMateriaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Editar Materia</h3>
+                <button class="modal-close" onclick="closeModal('editMateriaModal')">&times;</button>
+            </div>
+            <form id="editMateriaForm">
+                <input type="hidden" id="editMateriaId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Código de la Materia</label>
+                        <input type="text" id="editMateriaCodigo" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Año</label>
+                        <select id="editMateriaAno" class="form-input" required>
+                            <option value="">Seleccionar año...</option>
+                            <option value="1">1er Año</option>
+                            <option value="2">2do Año</option>
+                            <option value="3">3er Año</option>
+                            <option value="4">4to Año</option>
+                            <option value="5">5to Año</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cuatrimestre</label>
+                    <select id="editMateriaCuatrimestre" class="form-input" required>
+                        <option value="">Seleccionar cuatrimestre...</option>
+                        <option value="1">1er Cuatrimestre</option>
+                        <option value="2">2do Cuatrimestre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre de la Materia</label>
+                    <input type="text" id="editMateriaNombre" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Materia Correlativa (Opcional)</label>
+                    <select id="editMateriaCorrelativa" class="form-input">
+                        <option value="">Sin correlativa...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notas de Parciales</label>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Parcial 1 (1-10)</label>
+                            <input type="number" id="editMateriaParcial1" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Parcial 2 (1-10)</label>
+                            <input type="number" id="editMateriaParcial2" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                        </div>
+                    </div>
+                    <div id="editParcialesExtra"></div>
+                    <button type="button" class="btn btn-secondary btn-small" onclick="agregarParcialEdit()" style="margin-top: 10px;">
+                        <i class="fas fa-plus"></i> Agregar Parcial
                     </button>
-                    <button type="button" class="btn btn-secondary" onclick="closeHorarioModal()">
-                        Cancelar
-                    </button>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Examen Final (1-10)</label>
+                    <input type="number" id="editMateriaFinal" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Comentarios</label>
+                    <textarea id="editMateriaComentarios" class="form-input" rows="3"></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 25px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editMateriaModal')">Cancelar</button>
+                    <button type="submit" class="btn">Actualizar Materia</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        // Global variables
-        let materias = JSON.parse(localStorage.getItem('materias')) || [];
-        let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
-        let horarios = JSON.parse(localStorage.getItem('horarios')) || [];
-        let editingMateriaId = null;
+        // Data Storage
+        class DataManager {
+            static get(key) {
+                try {
+                    const data = localStorage.getItem(key);
+                    return data ? JSON.parse(data) : null;
+                } catch (e) {
+                    console.error('Error loading data:', e);
+                    return null;
+                }
+            }
 
-        // Motivational messages by day of week
-        const mensajesMotivacionales = {
-            0: "¡Domingo de planificación! Prepárate para una semana exitosa 📅",
-            1: "¡Lunes de energía! Hoy podés con todo 💪",
-            2: "¡Martes de productividad! Cada línea de código cuenta 💻",
-            3: "¡Miércoles de persistencia! Estás a mitad de camino 🚀",
-            4: "¡Jueves de enfoque! El éxito está cerca 🎯",
-            5: "¡Viernes de logros! Celebra tu progreso semanal 🎉",
-            6: "¡Sábado de reflexión! Descansa y planifica el futuro 🌟"
-        };
+            static set(key, data) {
+                try {
+                    localStorage.setItem(key, JSON.stringify(data));
+                    return true;
+                } catch (e) {
+                    console.error('Error saving data:', e);
+                    return false;
+                }
+            }
 
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
-            updateDateAndMessage();
-            renderMaterias();
-            renderTareas();
-            renderHorarios();
-            updateDashboard();
-            populateSelects();
-            initializeCalendar();
-        });
+            static remove(key) {
+                try {
+                    localStorage.removeItem(key);
+                    return true;
+                } catch (e) {
+                    console.error('Error removing data:', e);
+                    return false;
+                }
+            }
+        }
 
-        // Update date and motivational message
-        function updateDateAndMessage() {
-            const now = new Date();
-            const dayOfWeek = now.getDay();
-            const dateString = now.toLocaleDateString('es-ES', {
-                weekday: 'long',
+        // App State
+        let materias = DataManager.get('materias') || [];
+        let tareas = DataManager.get('tareas') || [];
+        let horarios = DataManager.get('horarios') || [];
+        let examenes = DataManager.get('examenes') || [];
+
+        // Utility Functions
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function formatDate(date) {
+            return new Date(date).toLocaleDateString('es-ES', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
-            
-            document.getElementById('current-date').textContent = dateString;
-            document.getElementById('motivational-message').textContent = mensajesMotivacionales[dayOfWeek];
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#28a745' : '#dc3545'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
 
         // Navigation
-        function showSection(sectionId) {
+        function showSection(sectionName) {
             // Hide all sections
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Update nav buttons
+
+            // Remove active class from all nav buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
+
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
             
+            // Add active class to selected nav button
             event.target.classList.add('active');
+
+            // Load section-specific data
+            switch(sectionName) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'materias':
+                    loadMaterias();
+                    break;
+                case 'tareas':
+                    loadTareas();
+                    break;
+                case 'examenes':
+                    loadExamenes();
+                    break;
+                case 'horario':
+                    loadHorario();
+                    break;
+                case 'progreso':
+                    loadProgreso();
+                    break;
+            }
         }
 
-        // Materias functions
-        function openMateriaModal(id = null) {
-            editingMateriaId = id;
-            const modal = document.getElementById('materiaModal');
-            const title = document.getElementById('materia-modal-title');
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Load data for dropdowns
+            if (modalId === 'tareaModal' || modalId === 'horarioModal' || modalId === 'examenModal') {
+                loadMateriasDropdown();
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
             
-            if (id) {
-                const materia = materias.find(m => m.id === id);
-                title.textContent = 'Editar Materia';
-                document.getElementById('materia-id').value = id;
-                document.getElementById('materia-codigo').value = materia.codigo;
-                document.getElementById('materia-nombre').value = materia.nombre;
-                document.getElementById('materia-año').value = materia.año || '';
-                document.getElementById('materia-cuatrimestre').value = materia.cuatrimestre || '';
-                document.getElementById('materia-comentarios').value = materia.comentarios || '';
-                
-                // Configurar cantidad de parciales
-                document.getElementById('cantidad-parciales').value = materia.cantidadParciales || 2;
-                updateParcialesInputs();
-                
-                // Configurar correlativas
-                populateCorrelativasSelect();
-                if (materia.correlativas) {
-                    const correlativasSelect = document.getElementById('materia-correlativas');
-                    Array.from(correlativasSelect.options).forEach(option => {
-                        option.selected = materia.correlativas.includes(option.value);
-                    });
-                }
-                
-                // Llenar notas de parciales
-                if (materia.parciales) {
-                    materia.parciales.forEach((nota, index) => {
-                        const input = document.getElementById(`parcial-${index + 1}`);
-                        if (input) input.value = nota;
-                    });
-                }
-                
-                // Llenar nota final
-                document.getElementById('nota-final').value = materia.notaFinal || '';
-                
-                // Calcular promedio
-                calculatePromedio();
+            // Reset forms
+            const form = modal.querySelector('form');
+            if (form) form.reset();
+        }
+
+        // Load materias for dropdowns
+        function loadMateriasDropdown() {
+            const tareaSelect = document.getElementById('tareaMateria');
+            const horarioSelect = document.getElementById('horarioMateria');
+            const examenSelect = document.getElementById('examenMateria');
+            
+            const options = materias.map(materia => 
+                `<option value="${materia.id}">${materia.codigo} - ${materia.nombre}</option>`
+            ).join('');
+
+            if (tareaSelect) {
+                tareaSelect.innerHTML = '<option value="">Seleccionar materia...</option>' + options;
+            }
+            if (horarioSelect) {
+                horarioSelect.innerHTML = '<option value="">Seleccionar materia...</option>' + options;
+            }
+            if (examenSelect) {
+                examenSelect.innerHTML = '<option value="">Seleccionar materia...</option>' + options;
+            }
+
+            // También cargar correlativas
+            loadCorrelativasDropdown('materiaCorrelativa');
+        }
+
+        // Load correlativas dropdown
+        function loadCorrelativasDropdown(selectId, excludeId = null) {
+            const select = document.getElementById(selectId);
+            if (!select) return;
+
+            const availableMaterias = materias.filter(m => m.id !== excludeId);
+            const options = availableMaterias.map(materia => 
+                `<option value="${materia.id}">${materia.codigo} - ${materia.nombre}</option>`
+            ).join('');
+
+            select.innerHTML = '<option value="">Sin correlativa...</option>' + options;
+        }
+
+        // Agregar parcial extra
+        function agregarParcial() {
+            const container = document.getElementById('parcialesExtra');
+            const parcialCount = container.children.length + 3; // +3 porque ya hay parcial 1 y 2
+            
+            const parcialDiv = document.createElement('div');
+            parcialDiv.className = 'form-row';
+            parcialDiv.style.marginTop = '10px';
+            parcialDiv.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Parcial ${parcialCount} (1-10)</label>
+                    <input type="number" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                </div>
+                <div style="display: flex; align-items: end;">
+                    <button type="button" class="btn btn-danger btn-small" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(parcialDiv);
+        }
+
+        // Agregar parcial extra en edición
+        function agregarParcialEdit() {
+            const container = document.getElementById('editParcialesExtra');
+            const parcialCount = container.children.length + 3; // +3 porque ya hay parcial 1 y 2
+            
+            const parcialDiv = document.createElement('div');
+            parcialDiv.className = 'form-row';
+            parcialDiv.style.marginTop = '10px';
+            parcialDiv.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Parcial ${parcialCount} (1-10)</label>
+                    <input type="number" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                </div>
+                <div style="display: flex; align-items: end;">
+                    <button type="button" class="btn btn-danger btn-small" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(parcialDiv);
+        }
+
+        // Calcular promedio de materia
+        function calcularPromedioMateria(materia) {
+            const notas = [];
+            
+            if (materia.parcial1) notas.push(materia.parcial1);
+            if (materia.parcial2) notas.push(materia.parcial2);
+            if (materia.parcialesExtra) {
+                materia.parcialesExtra.forEach(parcial => notas.push(parcial));
+            }
+            if (materia.final) notas.push(materia.final);
+            
+            if (notas.length === 0) return null;
+            
+            return notas.reduce((sum, nota) => sum + nota, 0) / notas.length;
+        }
+
+        // Obtener estado de materia
+        function obtenerEstadoMateria(materia, promedio) {
+            if (promedio === null) {
+                return { texto: 'Cursando', clase: 'cursando' };
+            }
+            
+            if (promedio >= 4) {
+                return { texto: 'Aprobada', clase: 'aprobada' };
+            } else if (promedio >= 2) {
+                return { texto: 'Regular', clase: 'regular' };
             } else {
-                title.textContent = 'Agregar Materia';
-                document.getElementById('materiaForm').reset();
-                document.getElementById('materia-id').value = '';
-                document.getElementById('cantidad-parciales').value = '2';
-                updateParcialesInputs();
-                populateCorrelativasSelect();
+                return { texto: 'Libre', clase: 'libre' };
             }
-            
-            modal.style.display = 'block';
         }
 
-        function closeMateriaModal() {
-            document.getElementById('materiaModal').style.display = 'none';
-            editingMateriaId = null;
-        }
-
-        document.getElementById('materiaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Recopilar notas de parciales
-            const cantidadParciales = parseInt(document.getElementById('cantidad-parciales').value);
-            const parciales = [];
-            for (let i = 1; i <= cantidadParciales; i++) {
-                const nota = parseFloat(document.getElementById(`parcial-${i}`).value);
-                if (!isNaN(nota) && nota > 0) {
-                    parciales.push(nota);
-                }
-            }
-            
-            const notaFinal = parseFloat(document.getElementById('nota-final').value) || null;
-            
-            // Obtener correlativas seleccionadas
-            const correlativasSelect = document.getElementById('materia-correlativas');
-            const correlativas = Array.from(correlativasSelect.selectedOptions).map(option => option.value);
-            
-            const materiaData = {
-                id: editingMateriaId || Date.now().toString(),
-                codigo: document.getElementById('materia-codigo').value,
-                nombre: document.getElementById('materia-nombre').value,
-                año: document.getElementById('materia-año').value,
-                cuatrimestre: document.getElementById('materia-cuatrimestre').value,
-                correlativas: correlativas,
-                cantidadParciales: cantidadParciales,
-                parciales: parciales,
-                notaFinal: notaFinal,
-                promedio: calculatePromedioFinal(parciales, notaFinal),
-                comentarios: document.getElementById('materia-comentarios').value,
-                fechaCreacion: editingMateriaId ? materias.find(m => m.id === editingMateriaId).fechaCreacion : new Date().toISOString()
+        // Daily Motivational Quotes
+        function loadDailyQuote() {
+            const quotes = {
+                0: { text: "¡Domingo de planificación! Prepárate para una semana exitosa", day: "Domingo" },
+                1: { text: "¡Lunes de nuevas oportunidades! Hoy podés con todo", day: "Lunes" },
+                2: { text: "¡Martes de productividad! Cada línea de código cuenta", day: "Martes" },
+                3: { text: "¡Miércoles de persistencia! Estás a mitad de camino", day: "Miércoles" },
+                4: { text: "¡Jueves de determinación! El éxito está cerca", day: "Jueves" },
+                5: { text: "¡Viernes de logros! Terminá la semana con fuerza", day: "Viernes" },
+                6: { text: "¡Sábado de reflexión! Celebrá tus avances", day: "Sábado" }
             };
 
-            if (editingMateriaId) {
-                const index = materias.findIndex(m => m.id === editingMateriaId);
-                materias[index] = materiaData;
-            } else {
-                materias.push(materiaData);
-            }
-
-            localStorage.setItem('materias', JSON.stringify(materias));
-            renderMaterias();
-            updateDashboard();
-            populateSelects();
-            closeMateriaModal();
-        });
-
-        function deleteMateria(id) {
-            if (confirm('¿Estás seguro de que quieres eliminar esta materia?')) {
-                materias = materias.filter(m => m.id !== id);
-                localStorage.setItem('materias', JSON.stringify(materias));
-                renderMaterias();
-                updateDashboard();
-                populateSelects();
-            }
+            const today = new Date().getDay();
+            const quote = quotes[today];
+            
+            document.getElementById('dailyQuote').textContent = quote.text;
+            document.getElementById('quoteDay').textContent = quote.day;
         }
 
-        function renderMaterias() {
-            const container = document.getElementById('materias-container');
+        // Dashboard Functions
+        function loadDashboard() {
+            loadDailyQuote();
+            updateStats();
+            loadRecentActivity();
+        }
+
+        function updateStats() {
+            const totalMaterias = materias.length;
+            
+            // Calcular materias aprobadas usando el nuevo sistema
+            const materiasAprobadas = materias.filter(m => {
+                const promedio = calcularPromedioMateria(m);
+                return promedio !== null && promedio >= 4;
+            }).length;
+            
+            // Calcular promedio general usando el nuevo sistema
+            const materiasConPromedio = materias.filter(m => calcularPromedioMateria(m) !== null);
+            const promedioGeneral = materiasConPromedio.length > 0 ? 
+                (materiasConPromedio.reduce((sum, m) => sum + calcularPromedioMateria(m), 0) / 
+                 materiasConPromedio.length).toFixed(1) : '0.0';
+            
+            const tareasPendientes = tareas.filter(t => !t.completada).length;
+
+            document.getElementById('totalMaterias').textContent = totalMaterias;
+            document.getElementById('materiasAprobadas').textContent = materiasAprobadas;
+            document.getElementById('promedioGeneral').textContent = promedioGeneral;
+            document.getElementById('tareasPendientes').textContent = tareasPendientes;
+        }
+
+        function loadRecentActivity() {
+            const recentContainer = document.getElementById('recentActivity');
+            const recentItems = [];
+
+            // Add recent materias
+            materias.slice(-3).forEach(materia => {
+                recentItems.push({
+                    type: 'materia',
+                    text: `Agregaste la materia: ${materia.nombre}`,
+                    icon: 'fas fa-book',
+                    time: 'Reciente'
+                });
+            });
+
+            // Add recent tareas
+            tareas.slice(-3).forEach(tarea => {
+                recentItems.push({
+                    type: 'tarea',
+                    text: `${tarea.completada ? 'Completaste' : 'Agregaste'} la tarea: ${tarea.nombre}`,
+                    icon: tarea.completada ? 'fas fa-check-circle' : 'fas fa-plus-circle',
+                    time: 'Reciente'
+                });
+            });
+
+            if (recentItems.length === 0) {
+                recentContainer.innerHTML = `
+                    <p style="color: #666; text-align: center; padding: 20px;">
+                        No hay actividad reciente. ¡Comienza agregando materias y tareas!
+                    </p>
+                `;
+                return;
+            }
+
+            recentContainer.innerHTML = recentItems.slice(-5).map(item => `
+                <div style="display: flex; align-items: center; gap: 15px; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                    <i class="${item.icon}" style="color: #a3223a; width: 20px;"></i>
+                    <div style="flex: 1;">
+                        <p style="margin: 0; font-weight: 500;">${item.text}</p>
+                        <small style="color: #666;">${item.time}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Materias Functions
+        function loadMaterias() {
+            const container = document.getElementById('materiasList');
             
             if (materias.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-book-open"></i>
-                        <h3>No hay materias agregadas</h3>
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">
+                        <i class="fas fa-book" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;"></i>
+                        <p>No hay materias agregadas aún.</p>
                         <p>¡Comienza agregando tu primera materia!</p>
                     </div>
                 `;
                 return;
             }
 
-            // Agrupar materias por año
-            const materiasPorAño = {};
-            
-            materias.forEach(materia => {
-                const año = materia.año || 'sin-año';
-                if (!materiasPorAño[año]) {
-                    materiasPorAño[año] = [];
+            // Sort materias by year, semester, and then alphabetically
+            const sortedMaterias = [...materias].sort((a, b) => {
+                if (a.ano !== b.ano) {
+                    return parseInt(a.ano) - parseInt(b.ano);
                 }
-                materiasPorAño[año].push(materia);
+                if (a.cuatrimestre !== b.cuatrimestre) {
+                    return parseInt(a.cuatrimestre) - parseInt(b.cuatrimestre);
+                }
+                return a.nombre.localeCompare(b.nombre);
             });
 
-            // Ordenar materias alfabéticamente dentro de cada año
-            Object.keys(materiasPorAño).forEach(año => {
-                materiasPorAño[año].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
+            // Group by year and semester
+            const materiasByYearAndSemester = {};
+            sortedMaterias.forEach(materia => {
+                const key = `${materia.ano}-${materia.cuatrimestre}`;
+                if (!materiasByYearAndSemester[key]) {
+                    materiasByYearAndSemester[key] = [];
+                }
+                materiasByYearAndSemester[key].push(materia);
             });
 
             let html = '';
-            
-            // Ordenar años (1, 2, 3, 4, 5, sin-año)
-            const añosOrdenados = Object.keys(materiasPorAño).sort((a, b) => {
-                if (a === 'sin-año') return 1;
-                if (b === 'sin-año') return -1;
-                return parseInt(a) - parseInt(b);
-            });
-
-            añosOrdenados.forEach(año => {
-                const materiasDelAño = materiasPorAño[año];
-                const tituloAño = año === 'sin-año' ? 'Sin Año Asignado' : `${año}° Año`;
+            Object.keys(materiasByYearAndSemester).sort().forEach(key => {
+                const [ano, cuatrimestre] = key.split('-');
+                const cuatrimestreText = cuatrimestre === '1' ? '1er Cuatrimestre' : '2do Cuatrimestre';
                 
                 html += `
-                    <div style="margin-bottom: 2rem;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem; padding: 1rem; background: linear-gradient(135deg, var(---red), var(---red-dark)); color: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(163, 34, 58, 0.2);">
-                            <h3 style="margin: 0; font-size: 1.3rem; font-weight: 700;">
-                                <i class="fas fa-graduation-cap" style="margin-right: 0.5rem;"></i>
-                                ${tituloAño}
-                            </h3>
-                            <div style="margin-left: auto; background: rgba(255, 255, 255, 0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
-                                ${materiasDelAño.length} materia${materiasDelAño.length !== 1 ? 's' : ''}
-                            </div>
+                    <div class="year-section" style="grid-column: 1 / -1;">
+                        <div class="year-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            ${ano}° Año - ${cuatrimestreText}
                         </div>
-                        <div style="display: grid; gap: 1rem;">
-                `;
-
-                materiasDelAño.forEach(materia => {
-                    const status = getGradeStatus(materia.promedio);
-                    
-                    html += `
-                        <div class="materia-card fade-in">
-                            <div class="materia-header">
-                                <div class="materia-info">
-                                    <h3>${materia.nombre}</h3>
-                                    <div class="materia-code">${materia.codigo}</div>
-                                    <div style="font-size: 0.8rem; color: var(--text-gray); margin-top: 0.25rem;">
-                                        ${materia.cuatrimestre ? (materia.cuatrimestre === 'anual' ? '📅 Anual' : `📅 ${materia.cuatrimestre}° Cuatrimestre`) : ''}
-                                    </div>
-                                    ${materia.correlativas && materia.correlativas.length > 0 ? `
-                                        <div style="font-size: 0.8rem; color: var(---red); margin-top: 0.25rem;">
-                                            🔗 Correlativas: ${getCorrelativasNames(materia.correlativas)}
+                        <div class="grid grid-3">
+                            ${materiasByYearAndSemester[key].map(materia => {
+                                const promedio = calcularPromedioMateria(materia);
+                                const estado = obtenerEstadoMateria(materia, promedio);
+                                const correlativa = materia.correlativaId ? materias.find(m => m.id === materia.correlativaId) : null;
+                                
+                                return `
+                                <div class="materia-item">
+                                    <div class="materia-header">
+                                        <div>
+                                            <div class="materia-code">${materia.codigo}</div>
+                                            <div class="materia-name">${materia.nombre}</div>
+                                            <div style="margin-top: 5px;">
+                                                <span class="estado-materia estado-${estado.clase}">${estado.texto}</span>
+                                            </div>
                                         </div>
-                                    ` : ''}
+                                        <div class="materia-note">
+                                            ${promedio !== null ? promedio.toFixed(1) : 'Sin notas'}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="materia-details">
+                                        <div class="materia-info">
+                                            <div class="info-item">
+                                                <span class="info-label">Año y Cuatrimestre</span>
+                                                <span class="info-value">${materia.ano}° Año - ${materia.cuatrimestre === '1' ? '1er' : '2do'} Cuatrimestre</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">Correlativa</span>
+                                                <span class="info-value">${correlativa ? `${correlativa.codigo} - ${correlativa.nombre}` : 'Sin correlativa'}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="notas-grid">
+                                            ${materia.parcial1 ? `
+                                                <div class="nota-item">
+                                                    <div class="nota-label">Parcial 1</div>
+                                                    <div class="nota-value">${materia.parcial1}</div>
+                                                </div>
+                                            ` : ''}
+                                            ${materia.parcial2 ? `
+                                                <div class="nota-item">
+                                                    <div class="nota-label">Parcial 2</div>
+                                                    <div class="nota-value">${materia.parcial2}</div>
+                                                </div>
+                                            ` : ''}
+                                            ${materia.parcialesExtra ? materia.parcialesExtra.map((parcial, index) => `
+                                                <div class="nota-item">
+                                                    <div class="nota-label">Parcial ${index + 3}</div>
+                                                    <div class="nota-value">${parcial}</div>
+                                                </div>
+                                            `).join('') : ''}
+                                            ${materia.final ? `
+                                                <div class="nota-item">
+                                                    <div class="nota-label">Final</div>
+                                                    <div class="nota-value">${materia.final}</div>
+                                                </div>
+                                            ` : ''}
+                                            ${promedio !== null ? `
+                                                <div class="nota-item promedio-final">
+                                                    <div class="nota-label">Promedio</div>
+                                                    <div class="nota-value">${promedio.toFixed(1)}</div>
+                                                </div>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                    
+                                    ${materia.comentarios ? `<p style="color: #666; margin: 15px 0;">${materia.comentarios}</p>` : ''}
+                                    
+                                    <div class="materia-actions">
+                                        <button class="btn btn-small" onclick="editMateria('${materia.id}')">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </button>
+                                        <button class="btn btn-small btn-danger" onclick="deleteMateria('${materia.id}')">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="materia-actions">
-                                    <button class="btn btn-small btn-secondary" onclick="openMateriaModal('${materia.id}')">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-small btn-danger" onclick="deleteMateria('${materia.id}')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="materia-grade">
-                                <div class="grade-value">${materia.promedio ? materia.promedio.toFixed(1) : '-'}</div>
-                                <div class="grade-status ${status.class}">${status.text}</div>
-                            </div>
-                            ${getNotasDetalle(materia)}
-                            ${materia.comentarios ? `<p style="color: var(--text-gray); font-size: 0.9rem;">${materia.comentarios}</p>` : ''}
-                        </div>
-                    `;
-                });
-
-                html += `
+                            `;
+                            }).join('')}
                         </div>
                     </div>
                 `;
@@ -1415,666 +1807,582 @@
             container.innerHTML = html;
         }
 
-        function getGradeStatus(promedio) {
-            if (!promedio || promedio === 0) {
-                return { class: 'status-pending', text: 'Pendiente' };
-            } else if (promedio >= 6) {
-                return { class: 'status-approved', text: 'Aprobada' };
-            } else {
-                return { class: 'status-in-progress', text: 'Cursando' };
-            }
-        }
-
-        // Tareas functions
-        function openTareaModal() {
-            document.getElementById('tareaModal').style.display = 'block';
-        }
-
-        function closeTareaModal() {
-            document.getElementById('tareaModal').style.display = 'none';
-            document.getElementById('tareaForm').reset();
-        }
-
-        document.getElementById('tareaForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function addMateria(event) {
+            event.preventDefault();
             
-            const tareaData = {
-                id: Date.now().toString(),
-                nombre: document.getElementById('tarea-nombre').value,
-                materiaId: document.getElementById('tarea-materia').value,
-                prioridad: document.getElementById('tarea-prioridad').value,
-                fechaLimite: document.getElementById('tarea-fecha').value,
-                completada: false,
-                fechaCreacion: new Date().toISOString()
+            // Recopilar parciales extra
+            const parcialesExtra = [];
+            const parcialesExtraInputs = document.querySelectorAll('#parcialesExtra input');
+            parcialesExtraInputs.forEach(input => {
+                if (input.value) {
+                    parcialesExtra.push(parseFloat(input.value));
+                }
+            });
+            
+            const materia = {
+                id: generateId(),
+                codigo: document.getElementById('materiaCodigo').value,
+                ano: document.getElementById('materiaAno').value,
+                cuatrimestre: document.getElementById('materiaCuatrimestre').value,
+                nombre: document.getElementById('materiaNombre').value,
+                correlativaId: document.getElementById('materiaCorrelativa').value || null,
+                parcial1: document.getElementById('materiaParcial1').value ? parseFloat(document.getElementById('materiaParcial1').value) : null,
+                parcial2: document.getElementById('materiaParcial2').value ? parseFloat(document.getElementById('materiaParcial2').value) : null,
+                parcialesExtra: parcialesExtra.length > 0 ? parcialesExtra : null,
+                final: document.getElementById('materiaFinal').value ? parseFloat(document.getElementById('materiaFinal').value) : null,
+                comentarios: document.getElementById('materiaComentarios').value || ''
             };
 
-            tareas.push(tareaData);
-            localStorage.setItem('tareas', JSON.stringify(tareas));
-            renderTareas();
-            updateDashboard();
-            closeTareaModal();
-        });
-
-        function toggleTarea(id) {
-            const tarea = tareas.find(t => t.id === id);
-            if (tarea) {
-                tarea.completada = !tarea.completada;
-                localStorage.setItem('tareas', JSON.stringify(tareas));
-                renderTareas();
-                updateDashboard();
-            }
+            materias.push(materia);
+            DataManager.set('materias', materias);
+            
+            // Limpiar parciales extra
+            document.getElementById('parcialesExtra').innerHTML = '';
+            
+            closeModal('materiaModal');
+            loadMaterias();
+            updateStats();
+            showNotification('Materia agregada correctamente');
         }
 
-        function deleteTarea(id) {
-            if (confirm('¿Eliminar esta tarea?')) {
-                tareas = tareas.filter(t => t.id !== id);
-                localStorage.setItem('tareas', JSON.stringify(tareas));
-                renderTareas();
-                updateDashboard();
+        function editMateria(id) {
+            const materia = materias.find(m => m.id === id);
+            if (!materia) return;
+
+            document.getElementById('editMateriaId').value = materia.id;
+            document.getElementById('editMateriaCodigo').value = materia.codigo;
+            document.getElementById('editMateriaAno').value = materia.ano || '';
+            document.getElementById('editMateriaCuatrimestre').value = materia.cuatrimestre || '';
+            document.getElementById('editMateriaNombre').value = materia.nombre;
+            document.getElementById('editMateriaCorrelativa').value = materia.correlativaId || '';
+            document.getElementById('editMateriaParcial1').value = materia.parcial1 || '';
+            document.getElementById('editMateriaParcial2').value = materia.parcial2 || '';
+            document.getElementById('editMateriaFinal').value = materia.final || '';
+            document.getElementById('editMateriaComentarios').value = materia.comentarios || '';
+
+            // Cargar parciales extra
+            const editParcialesExtra = document.getElementById('editParcialesExtra');
+            editParcialesExtra.innerHTML = '';
+            if (materia.parcialesExtra) {
+                materia.parcialesExtra.forEach((parcial, index) => {
+                    const parcialDiv = document.createElement('div');
+                    parcialDiv.className = 'form-row';
+                    parcialDiv.style.marginTop = '10px';
+                    parcialDiv.innerHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Parcial ${index + 3} (1-10)</label>
+                            <input type="number" class="form-input" min="1" max="10" step="0.1" value="${parcial}">
+                        </div>
+                        <div style="display: flex; align-items: end;">
+                            <button type="button" class="btn btn-danger btn-small" onclick="this.parentElement.parentElement.remove()">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    editParcialesExtra.appendChild(parcialDiv);
+                });
             }
+
+            // Cargar correlativas disponibles
+            loadCorrelativasDropdown('editMateriaCorrelativa', materia.id);
+
+            openModal('editMateriaModal');
         }
 
-        function clearCompletedTasks() {
-            if (confirm('¿Eliminar todas las tareas completadas?')) {
-                tareas = tareas.filter(t => !t.completada);
-                localStorage.setItem('tareas', JSON.stringify(tareas));
-                renderTareas();
-                updateDashboard();
-            }
+        function updateMateria(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('editMateriaId').value;
+            const materiaIndex = materias.findIndex(m => m.id === id);
+            
+            if (materiaIndex === -1) return;
+
+            // Recopilar parciales extra del formulario de edición
+            const parcialesExtra = [];
+            const parcialesExtraInputs = document.querySelectorAll('#editParcialesExtra input');
+            parcialesExtraInputs.forEach(input => {
+                if (input.value) {
+                    parcialesExtra.push(parseFloat(input.value));
+                }
+            });
+
+            materias[materiaIndex] = {
+                ...materias[materiaIndex],
+                codigo: document.getElementById('editMateriaCodigo').value,
+                ano: document.getElementById('editMateriaAno').value,
+                cuatrimestre: document.getElementById('editMateriaCuatrimestre').value,
+                nombre: document.getElementById('editMateriaNombre').value,
+                correlativaId: document.getElementById('editMateriaCorrelativa').value || null,
+                parcial1: document.getElementById('editMateriaParcial1').value ? parseFloat(document.getElementById('editMateriaParcial1').value) : null,
+                parcial2: document.getElementById('editMateriaParcial2').value ? parseFloat(document.getElementById('editMateriaParcial2').value) : null,
+                parcialesExtra: parcialesExtra.length > 0 ? parcialesExtra : null,
+                final: document.getElementById('editMateriaFinal').value ? parseFloat(document.getElementById('editMateriaFinal').value) : null,
+                comentarios: document.getElementById('editMateriaComentarios').value || ''
+            };
+
+            DataManager.set('materias', materias);
+            
+            // Limpiar parciales extra
+            document.getElementById('editParcialesExtra').innerHTML = '';
+            
+            closeModal('editMateriaModal');
+            loadMaterias();
+            updateStats();
+            showNotification('Materia actualizada correctamente');
         }
 
-        function renderTareas() {
-            const container = document.getElementById('tareas-container');
+        function deleteMateria(id) {
+            if (!confirm('¿Estás seguro de que quieres eliminar esta materia?')) return;
+
+            materias = materias.filter(m => m.id !== id);
+            DataManager.set('materias', materias);
+            
+            loadMaterias();
+            updateStats();
+            showNotification('Materia eliminada correctamente');
+        }
+
+        // Tareas Functions
+        function loadTareas() {
+            const container = document.getElementById('tareasList');
             
             if (tareas.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-clipboard-list"></i>
-                        <h3>No hay tareas pendientes</h3>
-                        <p>¡Perfecto momento para relajarse!</p>
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        <i class="fas fa-tasks" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;"></i>
+                        <p>No hay tareas agregadas aún.</p>
+                        <p>¡Comienza agregando tu primera tarea!</p>
                     </div>
                 `;
                 return;
             }
 
-            let html = '';
-            const tareasSorted = [...tareas].sort((a, b) => {
-                if (a.completada !== b.completada) return a.completada - b.completada;
-                return new Date(a.fechaLimite) - new Date(b.fechaLimite);
+            // Sort tareas by date and completion status
+            const sortedTareas = [...tareas].sort((a, b) => {
+                if (a.completada !== b.completada) {
+                    return a.completada ? 1 : -1;
+                }
+                return new Date(a.fecha) - new Date(b.fecha);
             });
 
-            tareasSorted.forEach(tarea => {
+            container.innerHTML = sortedTareas.map(tarea => {
                 const materia = materias.find(m => m.id === tarea.materiaId);
-                const fechaLimite = new Date(tarea.fechaLimite);
-                const priorityClass = `priority-${tarea.prioridad}`;
-                const taskClass = `task-item ${tarea.prioridad}-priority ${tarea.completada ? 'completed' : ''}`;
-
-                html += `
-                    <div class="${taskClass} fade-in">
+                const isOverdue = new Date(tarea.fecha) < new Date() && !tarea.completada;
+                
+                return `
+                    <div class="task-item ${tarea.completada ? 'completed' : ''}" ${isOverdue ? 'style="border-color: #dc3545;"' : ''}>
                         <div class="task-header">
-                            <div class="task-info">
-                                <h3>${tarea.nombre}</h3>
-                                <div class="task-meta">
-                                    ${materia ? materia.nombre : 'Sin materia'} • 
-                                    ${fechaLimite.toLocaleDateString('es-ES')} ${fechaLimite.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'})}
-                                </div>
+                            <input type="checkbox" class="task-checkbox" ${tarea.completada ? 'checked' : ''} 
+                                   onchange="toggleTarea('${tarea.id}')">
+                            <div class="task-name">${tarea.nombre}</div>
+                            <div class="task-priority priority-${tarea.prioridad}">${tarea.prioridad.toUpperCase()}</div>
+                        </div>
+                        <div class="task-meta">
+                            <div>
+                                <i class="fas fa-book"></i> ${materia ? materia.nombre : 'Materia eliminada'}
                             </div>
-                            <div class="task-actions">
-                                <div class="priority-badge ${priorityClass}">
-                                    ${tarea.prioridad === 'alta' ? '🔴' : tarea.prioridad === 'media' ? '🟡' : '🟢'}
-                                    ${tarea.prioridad.charAt(0).toUpperCase() + tarea.prioridad.slice(1)}
-                                </div>
-                                <input type="checkbox" ${tarea.completada ? 'checked' : ''} 
-                                       onchange="toggleTarea('${tarea.id}')" 
-                                       style="width: 20px; height: 20px; margin: 0 10px;">
-                                <button class="btn btn-small btn-danger" onclick="deleteTarea('${tarea.id}')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                            <div>
+                                <i class="fas fa-calendar"></i> ${formatDate(tarea.fecha)}
+                                ${isOverdue ? '<span style="color: #dc3545; font-weight: bold;"> (Vencida)</span>' : ''}
                             </div>
+                            <button class="btn btn-small btn-danger" onclick="deleteTarea('${tarea.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
                     </div>
                 `;
-            });
-
-            container.innerHTML = html;
+            }).join('');
         }
 
-        // Horario functions
-        function openHorarioModal() {
-            document.getElementById('horarioModal').style.display = 'block';
-        }
-
-        function closeHorarioModal() {
-            document.getElementById('horarioModal').style.display = 'none';
-            document.getElementById('horarioForm').reset();
-        }
-
-        document.getElementById('horarioForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function addTarea(event) {
+            event.preventDefault();
             
-            const horarioData = {
-                id: Date.now().toString(),
-                materiaId: document.getElementById('horario-materia').value,
-                dia: parseInt(document.getElementById('horario-dia').value),
-                horaInicio: document.getElementById('horario-inicio').value,
-                horaFin: document.getElementById('horario-fin').value,
-                aula: document.getElementById('horario-aula').value
+            const tarea = {
+                id: generateId(),
+                nombre: document.getElementById('tareaNombre').value,
+                materiaId: document.getElementById('tareaMateria').value,
+                fecha: document.getElementById('tareaFecha').value,
+                prioridad: document.getElementById('tareaPrioridad').value,
+                completada: false
             };
 
-            horarios.push(horarioData);
-            localStorage.setItem('horarios', JSON.stringify(horarios));
-            renderHorarios();
-            closeHorarioModal();
-        });
+            tareas.push(tarea);
+            DataManager.set('tareas', tareas);
+            
+            closeModal('tareaModal');
+            loadTareas();
+            updateStats();
+            showNotification('Tarea agregada correctamente');
+        }
+
+        function toggleTarea(id) {
+            const tareaIndex = tareas.findIndex(t => t.id === id);
+            if (tareaIndex === -1) return;
+
+            tareas[tareaIndex].completada = !tareas[tareaIndex].completada;
+            DataManager.set('tareas', tareas);
+            
+            loadTareas();
+            updateStats();
+            showNotification(tareas[tareaIndex].completada ? 'Tarea completada' : 'Tarea marcada como pendiente');
+        }
+
+        function deleteTarea(id) {
+            if (!confirm('¿Estás seguro de que quieres eliminar esta tarea?')) return;
+
+            tareas = tareas.filter(t => t.id !== id);
+            DataManager.set('tareas', tareas);
+            
+            loadTareas();
+            updateStats();
+            showNotification('Tarea eliminada correctamente');
+        }
+
+        // Horario Functions
+        function loadHorario() {
+            const table = document.getElementById('scheduleTable');
+            const days = ['', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const hours = [];
+            
+            // Generate hours from 8 to 18
+            for (let i = 8; i <= 18; i++) {
+                hours.push(`${i}:00`);
+            }
+
+            // Create header
+            let html = '<thead><tr>';
+            days.forEach(day => {
+                html += `<th>${day}</th>`;
+            });
+            html += '</tr></thead><tbody>';
+
+            // Create time slots
+            hours.forEach(hour => {
+                html += '<tr>';
+                html += `<td class="time-cell">${hour}</td>`;
+                
+                days.slice(1).forEach(day => {
+                    const dayEvents = horarios.filter(h => h.dia === day.toLowerCase() && h.inicio <= hour && h.fin > hour);
+                    html += '<td>';
+                    dayEvents.forEach(event => {
+                        const materia = materias.find(m => m.id === event.materiaId);
+                        html += `
+                            <div class="schedule-event" onclick="deleteHorario('${event.id}')">
+                                ${materia ? materia.codigo : 'N/A'}
+                                ${event.aula ? `<br><small>${event.aula}</small>` : ''}
+                            </div>
+                        `;
+                    });
+                    html += '</td>';
+                });
+                
+                html += '</tr>';
+            });
+
+            html += '</tbody>';
+            table.innerHTML = html;
+        }
+
+        function addHorario(event) {
+            event.preventDefault();
+            
+            const horario = {
+                id: generateId(),
+                materiaId: document.getElementById('horarioMateria').value,
+                dia: document.getElementById('horarioDia').value,
+                aula: document.getElementById('horarioAula').value || '',
+                inicio: document.getElementById('horarioInicio').value,
+                fin: document.getElementById('horarioFin').value
+            };
+
+            horarios.push(horario);
+            DataManager.set('horarios', horarios);
+            
+            closeModal('horarioModal');
+            loadHorario();
+            showNotification('Clase agregada al horario');
+        }
 
         function deleteHorario(id) {
-            if (confirm('¿Eliminar esta clase?')) {
-                horarios = horarios.filter(h => h.id !== id);
-                localStorage.setItem('horarios', JSON.stringify(horarios));
-                renderHorarios();
-            }
-        }
+            if (!confirm('¿Eliminar esta clase del horario?')) return;
 
-        function initializeCalendar() {
-            const calendarBody = document.getElementById('calendar-body');
-            const timeSlots = [];
+            horarios = horarios.filter(h => h.id !== id);
+            DataManager.set('horarios', horarios);
             
-            // Generate time slots from 8:00 to 22:00
-            for (let hour = 8; hour <= 22; hour++) {
-                timeSlots.push(`${hour.toString().padStart(2, '0')}:00`);
-            }
-
-            let html = '';
-            timeSlots.forEach(time => {
-                html += `
-                    <div class="calendar-cell" data-time="${time}" data-day="0"></div>
-                    <div class="calendar-cell" data-time="${time}" data-day="1"></div>
-                    <div class="calendar-cell" data-time="${time}" data-day="2"></div>
-                    <div class="calendar-cell" data-time="${time}" data-day="3"></div>
-                    <div class="calendar-cell" data-time="${time}" data-day="4"></div>
-                    <div class="calendar-cell" data-time="${time}" data-day="5"></div>
-                    <div class="calendar-cell" data-time="${time}" data-day="6"></div>
-                `;
-            });
-
-            calendarBody.innerHTML = html;
+            loadHorario();
+            showNotification('Clase eliminada del horario');
         }
 
-        function renderHorarios() {
-            // Clear all calendar events
-            document.querySelectorAll('.calendar-event').forEach(event => event.remove());
-
-            horarios.forEach(horario => {
-                const materia = materias.find(m => m.id === horario.materiaId);
-                if (!materia) return;
-
-                const cell = document.querySelector(`[data-day="${horario.dia}"][data-time="${horario.horaInicio}"]`);
-                if (cell) {
-                    const eventDiv = document.createElement('div');
-                    eventDiv.className = 'calendar-event';
-                    eventDiv.innerHTML = `
-                        <div style="font-weight: 600; margin-bottom: 2px;">${materia.nombre}</div>
-                        <div style="font-size: 0.7rem;">${horario.aula || ''}</div>
-                        <div style="font-size: 0.7rem;">${horario.horaInicio} - ${horario.horaFin}</div>
-                        <button onclick="deleteHorario('${horario.id}')" 
-                                style="position: absolute; top: 2px; right: 2px; background: none; border: none; color: white; cursor: pointer;">
-                            <i class="fas fa-times" style="font-size: 0.7rem;"></i>
-                        </button>
-                    `;
-                    eventDiv.style.position = 'relative';
-                    cell.appendChild(eventDiv);
-                }
-            });
-        }
-
-        // Dashboard functions
-        function updateDashboard() {
-            // Total materias
-            document.getElementById('total-materias').textContent = materias.length;
-
-            // Materias aprobadas
-            const materiasAprobadas = materias.filter(m => m.promedio >= 4).length;
-            document.getElementById('materias-aprobadas').textContent = materiasAprobadas;
-
-            // Promedio general
-            const materiasConPromedio = materias.filter(m => m.promedio > 0);
-            const promedio = materiasConPromedio.length > 0 
-                ? materiasConPromedio.reduce((sum, m) => sum + m.promedio, 0) / materiasConPromedio.length 
-                : 0;
-            document.getElementById('promedio-general').textContent = promedio.toFixed(1);
-
-            // Tareas pendientes
-            const tareasPendientes = tareas.filter(t => !t.completada).length;
-            document.getElementById('tareas-pendientes').textContent = tareasPendientes;
-
-            // Progress bar (assuming 50 total subjects for the degree)
-            const totalSubjects = 50;
-            const progressPercentage = materias.length > 0 ? Math.round((materiasAprobadas / totalSubjects) * 100) : 0;
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
+        // Exámenes Functions
+        function loadExamenes() {
+            const container = document.getElementById('examenesList');
             
-            progressBar.style.width = `${progressPercentage}%`;
-            progressBar.textContent = `${progressPercentage}%`;
-            
-            if (progressPercentage === 0) {
-                progressText.textContent = 'Comienza agregando tus materias para ver tu progreso';
-            } else if (progressPercentage < 20) {
-                progressText.textContent = '¡Excelente comienzo! Sigue así 💪';
-            } else if (progressPercentage < 50) {
-                progressText.textContent = '¡Vas por buen camino! Ya tienes una base sólida 🚀';
-            } else if (progressPercentage < 80) {
-                progressText.textContent = '¡Increíble progreso! Estás en la recta final 🎯';
-            } else {
-                progressText.textContent = '¡Casi graduado! El éxito está muy cerca 🎓';
-            }
-
-            // Update upcoming tasks
-            updateUpcomingTasks();
-        }
-
-        function updateUpcomingTasks() {
-            const container = document.getElementById('upcoming-tasks');
-            const upcomingTasks = tareas
-                .filter(t => !t.completada)
-                .sort((a, b) => new Date(a.fechaLimite) - new Date(b.fechaLimite))
-                .slice(0, 3);
-
-            if (upcomingTasks.length === 0) {
+            if (examenes.length === 0) {
                 container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-clipboard-list"></i>
-                        <h3>No hay tareas próximas</h3>
-                        <p>¡Perfecto momento para relajarse!</p>
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        <i class="fas fa-clipboard-list" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;"></i>
+                        <p>No hay exámenes registrados aún.</p>
+                        <p>¡Comienza registrando tu primer examen!</p>
                     </div>
                 `;
                 return;
             }
 
-            let html = '';
-            upcomingTasks.forEach(tarea => {
-                const materia = materias.find(m => m.id === tarea.materiaId);
-                const fechaLimite = new Date(tarea.fechaLimite);
-                const now = new Date();
-                const daysLeft = Math.ceil((fechaLimite - now) / (1000 * 60 * 60 * 24));
+            // Sort exámenes by date (most recent first)
+            const sortedExamenes = [...examenes].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
-                html += `
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--bg-light); border-radius: 8px; margin-bottom: 0.5rem;">
-                        <div>
-                            <h4 style="font-weight: 600; margin-bottom: 0.25rem;">${tarea.nombre}</h4>
-                            <p style="color: var(--text-gray); font-size: 0.9rem;">${materia ? materia.nombre : 'Sin materia'}</p>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-weight: 600; color: ${daysLeft <= 1 ? '#e53e3e' : daysLeft <= 3 ? '#ed8936' : 'var(--text-gray)'};">
-                                ${daysLeft <= 0 ? '¡Vencida!' : daysLeft === 1 ? 'Mañana' : `${daysLeft} días`}
+            container.innerHTML = sortedExamenes.map(examen => {
+                const materia = materias.find(m => m.id === examen.materiaId);
+                
+                return `
+                    <div class="exam-item">
+                        <div class="exam-header">
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                    <span class="exam-type ${examen.tipo}">${examen.tipo}</span>
+                                    <span style="font-weight: 600; color: #333;">
+                                        ${materia ? `${materia.codigo} - ${materia.nombre}` : 'Materia eliminada'}
+                                    </span>
+                                </div>
+                                <div style="color: #666; font-size: 0.9rem;">
+                                    <i class="fas fa-calendar"></i> ${formatDate(examen.fecha)}
+                                </div>
                             </div>
-                            <div class="priority-badge priority-${tarea.prioridad}" style="margin-top: 0.25rem;">
-                                ${tarea.prioridad}
+                            <div class="exam-note">
+                                ${examen.nota ? examen.nota : 'Sin nota'}
                             </div>
                         </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
-        // Populate selects with materias
-        function populateSelects() {
-            const tareaSelect = document.getElementById('tarea-materia');
-            const horarioSelect = document.getElementById('horario-materia');
-
-            // Clear existing options (except first one)
-            tareaSelect.innerHTML = '<option value="">Seleccionar materia</option>';
-            horarioSelect.innerHTML = '<option value="">Seleccionar materia</option>';
-
-            materias.forEach(materia => {
-                const option1 = document.createElement('option');
-                option1.value = materia.id;
-                option1.textContent = `${materia.nombre} (${materia.codigo})`;
-                tareaSelect.appendChild(option1);
-
-                const option2 = document.createElement('option');
-                option2.value = materia.id;
-                option2.textContent = `${materia.nombre} (${materia.codigo})`;
-                horarioSelect.appendChild(option2);
-            });
-        }
-
-        // Populate correlativas select (excluding current materia)
-        function populateCorrelativasSelect() {
-            const correlativasSelect = document.getElementById('materia-correlativas');
-            const currentMateriaId = document.getElementById('materia-id').value;
-            
-            correlativasSelect.innerHTML = '';
-
-            materias.forEach(materia => {
-                if (materia.id !== currentMateriaId) {
-                    const option = document.createElement('option');
-                    option.value = materia.id;
-                    option.textContent = `${materia.nombre} (${materia.codigo})`;
-                    correlativasSelect.appendChild(option);
-                }
-            });
-        }
-
-        // Get correlativas names for display
-        function getCorrelativasNames(correlativasIds) {
-            if (!correlativasIds || correlativasIds.length === 0) return '';
-            
-            const nombres = correlativasIds.map(id => {
-                const materia = materias.find(m => m.id === id);
-                return materia ? materia.codigo : 'Materia eliminada';
-            });
-            
-            return nombres.join(', ');
-        }
-
-        // Close modals when clicking outside
-        window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        }
-
-        // Helper functions for parciales system
-        function updateParcialesInputs() {
-            const cantidad = parseInt(document.getElementById('cantidad-parciales').value);
-            const container = document.getElementById('parciales-container');
-            
-            let html = '';
-            for (let i = 1; i <= cantidad; i++) {
-                html += `
-                    <div class="form-group">
-                        <label class="form-label" style="font-size: 0.9rem; color: var(--text-gray);">Parcial ${i}</label>
-                        <input type="number" id="parcial-${i}" class="form-input" min="1" max="10" step="0.1" placeholder="0.0" onchange="calculatePromedio()">
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-            calculatePromedio();
-        }
-
-        function calculatePromedio() {
-            const cantidadParciales = parseInt(document.getElementById('cantidad-parciales').value);
-            const parciales = [];
-            
-            // Recopilar notas de parciales
-            for (let i = 1; i <= cantidadParciales; i++) {
-                const input = document.getElementById(`parcial-${i}`);
-                if (input && input.value) {
-                    const nota = parseFloat(input.value);
-                    if (!isNaN(nota) && nota > 0) {
-                        parciales.push(nota);
-                    }
-                }
-            }
-            
-            const notaFinalInput = document.getElementById('nota-final');
-            const notaFinal = notaFinalInput && notaFinalInput.value ? parseFloat(notaFinalInput.value) : null;
-            
-            const promedio = calculatePromedioFinal(parciales, notaFinal);
-            const promedioInput = document.getElementById('promedio-calculado');
-            
-            if (promedioInput) {
-                if (promedio > 0) {
-                    promedioInput.value = promedio.toFixed(1);
-                    promedioInput.style.color = promedio >= 4 ? '#38a169' : promedio >= 4 ? '#ed8936' : '#e53e3e';
-                } else {
-                    promedioInput.value = '';
-                    promedioInput.style.color = 'var(---red)';
-                }
-            }
-        }
-
-        function calculatePromedioFinal(parciales, notaFinal) {
-            if (parciales.length === 0 && !notaFinal) return 0;
-            
-            let suma = 0;
-            let contador = 0;
-            
-            // Sumar parciales (peso 70%)
-            if (parciales.length > 0) {
-                const promedioParciales = parciales.reduce((sum, nota) => sum + nota, 0) / parciales.length;
-                suma += promedioParciales * 0.7;
-                contador += 0.7;
-            }
-            
-            // Sumar final (peso 30%)
-            if (notaFinal && notaFinal > 0) {
-                suma += notaFinal * 0.3;
-                contador += 0.3;
-            }
-            
-            return contador > 0 ? suma / contador : 0;
-        }
-
-        function getNotasDetalle(materia) {
-            if (!materia.parciales && !materia.notaFinal) return '';
-            
-            let html = '<div style="margin-top: 1rem; padding: 1rem; background: var(--bg-light); border-radius: 8px;">';
-            html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; font-size: 0.9rem;">';
-            
-            // Mostrar parciales
-            if (materia.parciales && materia.parciales.length > 0) {
-                materia.parciales.forEach((nota, index) => {
-                    html += `
-                        <div style="text-align: center;">
-                            <div style="color: var(--text-gray); font-size: 0.8rem;">P${index + 1}</div>
-                            <div style="font-weight: 600; color: ${nota >= 4 ? '#38a169' : '#e53e3e'};">${nota.toFixed(1)}</div>
+                        ${examen.observaciones ? `<p style="color: #666; margin-bottom: 15px; font-style: italic;">${examen.observaciones}</p>` : ''}
+                        <div class="exam-meta">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <span style="color: ${examen.nota >= 6 ? '#28a745' : examen.nota >= 4 ? '#ffc107' : '#dc3545'}; font-weight: bold;">
+                                    ${examen.nota >= 6 ? 'Aprobado' : examen.nota >= 4 ? 'Regular' : examen.nota ? 'Desaprobado' : 'Pendiente'}
+                                </span>
+                            </div>
+                            <button class="btn btn-small btn-danger" onclick="deleteExamen('${examen.id}')">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
                         </div>
-                    `;
-                });
-            }
-            
-            // Mostrar final
-            if (materia.notaFinal) {
-                html += `
-                    <div style="text-align: center;">
-                        <div style="color: var(--text-gray); font-size: 0.8rem;">Final</div>
-                        <div style="font-weight: 600; color: ${materia.notaFinal >= 4 ? '#38a169' : '#e53e3e'};">${materia.notaFinal.toFixed(1)}</div>
                     </div>
                 `;
-            }
-            
-            html += '</div></div>';
-            return html;
+            }).join('');
         }
 
-        // Generate desktop shortcut
-        function generateShortcut() {
-            try {
-                // Create the HTML content for the shortcut file
-                const htmlContent = document.documentElement.outerHTML;
-                
-                // Create a blob with the HTML content
-                const blob = new Blob([htmlContent], { type: 'text/html' });
-                
-                // Create download link
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Gestión Académica .html';
-                
-                // Trigger download
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                
-                // Clean up
-                URL.revokeObjectURL(url);
-                
-                // Show success message
-                showNotification('¡Acceso directo generado! 🎉', 'El archivo se ha descargado. Guárdalo en tu escritorio para acceso rápido.', 'success');
-                
-            } catch (error) {
-                console.error('Error generating shortcut:', error);
-                showNotification('Error al generar acceso directo ❌', 'Hubo un problema al crear el archivo. Intenta nuevamente.', 'error');
-            }
+        function addExamen(event) {
+            event.preventDefault();
+            
+            const examen = {
+                id: generateId(),
+                materiaId: document.getElementById('examenMateria').value,
+                tipo: document.getElementById('examenTipo').value,
+                fecha: document.getElementById('examenFecha').value,
+                nota: document.getElementById('examenNota').value || null,
+                observaciones: document.getElementById('examenObservaciones').value || ''
+            };
+
+            examenes.push(examen);
+            DataManager.set('examenes', examenes);
+            
+            closeModal('examenModal');
+            loadExamenes();
+            updateStats();
+            showNotification('Examen registrado correctamente');
         }
 
-        // Show notification system
-        function showNotification(title, message, type = 'info') {
-            // Remove existing notifications
-            const existingNotifications = document.querySelectorAll('.notification');
-            existingNotifications.forEach(notification => notification.remove());
+        function deleteExamen(id) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este examen?')) return;
+
+            examenes = examenes.filter(e => e.id !== id);
+            DataManager.set('examenes', examenes);
             
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            notification.innerHTML = `
-                <div class="notification-content">
-                    <div class="notification-title">${title}</div>
-                    <div class="notification-message">${message}</div>
-                    <button class="notification-close" onclick="this.parentElement.parentElement.remove()">
-                        <i class="fas fa-times"></i>
-                    </button>
+            loadExamenes();
+            updateStats();
+            showNotification('Examen eliminado correctamente');
+        }
+
+        // Progreso Functions
+        function loadProgreso() {
+            const totalMaterias = materias.length;
+            
+            // Calcular materias aprobadas usando el nuevo sistema
+            const materiasAprobadas = materias.filter(m => {
+                const promedio = calcularPromedioMateria(m);
+                return promedio !== null && promedio >= 4;
+            }).length;
+            
+            const progreso = totalMaterias > 0 ? Math.round((materiasAprobadas / totalMaterias) * 100) : 0;
+
+            // Update progress bar
+            document.getElementById('careerProgress').style.width = `${progreso}%`;
+            document.getElementById('progressText').textContent = `${progreso}% completado (${materiasAprobadas}/${totalMaterias} materias)`;
+
+            // Load status distribution
+            loadMateriasStatus();
+            loadNotasDistribution();
+        }
+
+        function loadMateriasStatus() {
+            const container = document.getElementById('materiasStatus');
+            
+            // Usar el nuevo sistema de cálculo
+            const aprobadas = materias.filter(m => {
+                const promedio = calcularPromedioMateria(m);
+                return promedio !== null && promedio >= 4;
+            }).length;
+            
+            const regulares = materias.filter(m => {
+                const promedio = calcularPromedioMateria(m);
+                return promedio !== null && promedio >= 2 && promedio < 4;
+            }).length;
+            
+            const libres = materias.filter(m => {
+                const promedio = calcularPromedioMateria(m);
+                return promedio !== null && promedio < 2;
+            }).length;
+            
+            const cursando = materias.filter(m => calcularPromedioMateria(m) === null).length;
+
+            container.innerHTML = `
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Aprobadas (≥4.0)</span>
+                        <span style="font-weight: bold; color: #28a745;">${aprobadas}</span>
+                    </div>
+                    <div style="background: #e9ecef; border-radius: 10px; height: 8px;">
+                        <div style="background: #28a745; height: 100%; border-radius: 10px; width: ${materias.length > 0 ? (aprobadas / materias.length) * 100 : 0}%;"></div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Regulares (2.0-3.9)</span>
+                        <span style="font-weight: bold; color: #ffc107;">${regulares}</span>
+                    </div>
+                    <div style="background: #e9ecef; border-radius: 10px; height: 8px;">
+                        <div style="background: #ffc107; height: 100%; border-radius: 10px; width: ${materias.length > 0 ? (regulares / materias.length) * 100 : 0}%;"></div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Libres (<2.0)</span>
+                        <span style="font-weight: bold; color: #dc3545;">${libres}</span>
+                    </div>
+                    <div style="background: #e9ecef; border-radius: 10px; height: 8px;">
+                        <div style="background: #dc3545; height: 100%; border-radius: 10px; width: ${materias.length > 0 ? (libres / materias.length) * 100 : 0}%;"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Cursando</span>
+                        <span style="font-weight: bold; color: #17a2b8;">${cursando}</span>
+                    </div>
+                    <div style="background: #e9ecef; border-radius: 10px; height: 8px;">
+                        <div style="background: #17a2b8; height: 100%; border-radius: 10px; width: ${materias.length > 0 ? (cursando / materias.length) * 100 : 0}%;"></div>
+                    </div>
                 </div>
             `;
+        }
+
+        function loadNotasDistribution() {
+            const container = document.getElementById('notasDistribution');
+            const materiasConPromedio = materias.filter(m => calcularPromedioMateria(m) !== null);
             
-            // Add notification styles if not already present
-            if (!document.querySelector('#notification-styles')) {
-                const style = document.createElement('style');
-                style.id = 'notification-styles';
-                style.textContent = `
-                    .notification {
-                        position: fixed;
-                        top: 20px;
-                        right: 20px;
-                        z-index: 10000;
-                        max-width: 400px;
-                        border-radius: 12px;
-                        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-                        animation: slideInRight 0.3s ease-out;
-                        backdrop-filter: blur(10px);
-                    }
-                    
-                    .notification-success {
-                        background: linear-gradient(135deg, #38a169, #2f855a);
-                        color: white;
-                    }
-                    
-                    .notification-error {
-                        background: linear-gradient(135deg, #e53e3e, #c53030);
-                        color: white;
-                    }
-                    
-                    .notification-info {
-                        background: linear-gradient(135deg, var(---red), var(---red-dark));
-                        color: white;
-                    }
-                    
-                    .notification-content {
-                        padding: 1.5rem;
-                        position: relative;
-                    }
-                    
-                    .notification-title {
-                        font-weight: 700;
-                        font-size: 1.1rem;
-                        margin-bottom: 0.5rem;
-                    }
-                    
-                    .notification-message {
-                        font-size: 0.9rem;
-                        opacity: 0.9;
-                        line-height: 1.4;
-                    }
-                    
-                    .notification-close {
-                        position: absolute;
-                        top: 10px;
-                        right: 10px;
-                        background: none;
-                        border: none;
-                        color: white;
-                        cursor: pointer;
-                        padding: 5px;
-                        border-radius: 50%;
-                        transition: background-color 0.2s ease;
-                    }
-                    
-                    .notification-close:hover {
-                        background: rgba(255, 255, 255, 0.2);
-                    }
-                    
-                    @keyframes slideInRight {
-                        from {
-                            transform: translateX(100%);
-                            opacity: 0;
-                        }
-                        to {
-                            transform: translateX(0);
-                            opacity: 1;
-                        }
-                    }
-                    
-                    @media (max-width: 768px) {
-                        .notification {
-                            top: 10px;
-                            right: 10px;
-                            left: 10px;
-                            max-width: none;
-                        }
-                    }
+            if (materiasConPromedio.length === 0) {
+                container.innerHTML = '<p style="color: #666; text-align: center;">No hay promedios calculados aún</p>';
+                return;
+            }
+
+            const ranges = {
+                '9-10': materiasConPromedio.filter(m => {
+                    const promedio = calcularPromedioMateria(m);
+                    return promedio >= 9;
+                }).length,
+                '8-8.9': materiasConPromedio.filter(m => {
+                    const promedio = calcularPromedioMateria(m);
+                    return promedio >= 8 && promedio < 9;
+                }).length,
+                '7-7.9': materiasConPromedio.filter(m => {
+                    const promedio = calcularPromedioMateria(m);
+                    return promedio >= 7 && promedio < 8;
+                }).length,
+                '6-6.9': materiasConPromedio.filter(m => {
+                    const promedio = calcularPromedioMateria(m);
+                    return promedio >= 6 && promedio < 7;
+                }).length,
+                '4-5.9': materiasConPromedio.filter(m => {
+                    const promedio = calcularPromedioMateria(m);
+                    return promedio >= 4 && promedio < 6;
+                }).length,
+                '0-3.9': materiasConPromedio.filter(m => {
+                    const promedio = calcularPromedioMateria(m);
+                    return promedio < 4;
+                }).length
+            };
+
+            const colors = ['#28a745', '#17a2b8', '#ffc107', '#fd7e14', '#6f42c1', '#dc3545'];
+            let html = '';
+
+            Object.entries(ranges).forEach(([range, count], index) => {
+                const percentage = (count / materiasConPromedio.length) * 100;
+                html += `
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>${range}</span>
+                            <span style="font-weight: bold;">${count}</span>
+                        </div>
+                        <div style="background: #e9ecef; border-radius: 10px; height: 8px;">
+                            <div style="background: ${colors[index]}; height: 100%; border-radius: 10px; width: ${percentage}%;"></div>
+                        </div>
+                    </div>
                 `;
-                document.head.appendChild(style);
-            }
-            
-            // Add to page
-            document.body.appendChild(notification);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                if (notification.parentElement) {
-                    notification.style.animation = 'slideInRight 0.3s ease-out reverse';
-                    setTimeout(() => notification.remove(), 300);
-                }
-            }, 5000);
+            });
+
+            container.innerHTML = html;
         }
 
-        // Add PWA-like functionality for better desktop experience
-        function initializePWAFeatures() {
-            // Add to home screen prompt for mobile
-            let deferredPrompt;
-            
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-                
-                // Show install button or notification
-                showNotification(
-                    '📱 ¡Instalar App!', 
-                    'Puedes instalar esta aplicación en tu dispositivo para un acceso más rápido.',
-                    'info'
-                );
-            });
-            
-            // Handle app installation
-            window.addEventListener('appinstalled', () => {
-                showNotification(
-                    '✅ ¡Instalado!', 
-                    'La aplicación se ha instalado correctamente en tu dispositivo.',
-                    'success'
-                );
-                deferredPrompt = null;
-            });
-        }
-
-        // Update motivational message at midnight
-        setInterval(function() {
-            const now = new Date();
-            if (now.getHours() === 0 && now.getMinutes() === 0) {
-                updateDateAndMessage();
-            }
-        }, 60000);
-
-        // Initialize PWA features when page loads
+        // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
-            initializePWAFeatures();
+            // Load initial data
+            loadDashboard();
+
+            // Form event listeners
+            document.getElementById('materiaForm').addEventListener('submit', addMateria);
+            document.getElementById('editMateriaForm').addEventListener('submit', updateMateria);
+            document.getElementById('tareaForm').addEventListener('submit', addTarea);
+            document.getElementById('examenForm').addEventListener('submit', addExamen);
+            document.getElementById('horarioForm').addEventListener('submit', addHorario);
+
+            // Modal close on outside click
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        closeModal(modal.id);
+                    }
+                });
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal.active').forEach(modal => {
+                        closeModal(modal.id);
+                    });
+                }
+            });
         });
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ab1cd4336dd841',t:'MTc1NDQ0NzQzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b17740709fe99e',t:'MTc1NDUxNDA0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
