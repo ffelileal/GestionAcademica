@@ -1101,8 +1101,23 @@
                     </button>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Examen Final (1-10)</label>
-                    <input type="number" id="materiaFinal" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                    <label class="form-label">Exámenes Finales</label>
+                    <div id="finalesContainer">
+                        <div class="form-row" style="margin-bottom: 10px;">
+                            <div class="form-group">
+                                <label class="form-label">1er Llamado (1-10)</label>
+                                <input type="number" id="materiaFinal1" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Fecha 1er Llamado</label>
+                                <input type="date" id="materiaFinalFecha1" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="finalesExtra"></div>
+                    <button type="button" class="btn btn-secondary btn-small" onclick="agregarFinal()" style="margin-top: 10px;">
+                        <i class="fas fa-plus"></i> Agregar Llamado
+                    </button>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Comentarios</label>
@@ -1314,8 +1329,23 @@
                     </button>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Examen Final (1-10)</label>
-                    <input type="number" id="editMateriaFinal" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                    <label class="form-label">Exámenes Finales</label>
+                    <div id="editFinalesContainer">
+                        <div class="form-row" style="margin-bottom: 10px;">
+                            <div class="form-group">
+                                <label class="form-label">1er Llamado (1-10)</label>
+                                <input type="number" id="editMateriaFinal1" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Fecha 1er Llamado</label>
+                                <input type="date" id="editMateriaFinalFecha1" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="editFinalesExtra"></div>
+                    <button type="button" class="btn btn-secondary btn-small" onclick="agregarFinalEdit()" style="margin-top: 10px;">
+                        <i class="fas fa-plus"></i> Agregar Llamado
+                    </button>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Comentarios</label>
@@ -1549,16 +1579,80 @@
             container.appendChild(parcialDiv);
         }
 
+        // Agregar final extra
+        function agregarFinal() {
+            const container = document.getElementById('finalesExtra');
+            const finalCount = container.children.length + 2; // +2 porque ya hay 1er llamado
+            const llamadoText = finalCount === 2 ? '2do Llamado' : finalCount === 3 ? '3er Llamado' : `${finalCount}° Llamado`;
+            
+            const finalDiv = document.createElement('div');
+            finalDiv.className = 'form-row';
+            finalDiv.style.marginTop = '10px';
+            finalDiv.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">${llamadoText} (1-10)</label>
+                    <input type="number" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha ${llamadoText}</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div style="display: flex; align-items: end;">
+                    <button type="button" class="btn btn-danger btn-small" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(finalDiv);
+        }
+
+        // Agregar final extra en edición
+        function agregarFinalEdit() {
+            const container = document.getElementById('editFinalesExtra');
+            const finalCount = container.children.length + 2; // +2 porque ya hay 1er llamado
+            const llamadoText = finalCount === 2 ? '2do Llamado' : finalCount === 3 ? '3er Llamado' : `${finalCount}° Llamado`;
+            
+            const finalDiv = document.createElement('div');
+            finalDiv.className = 'form-row';
+            finalDiv.style.marginTop = '10px';
+            finalDiv.innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">${llamadoText} (1-10)</label>
+                    <input type="number" class="form-input" min="1" max="10" step="0.1" placeholder="0.0">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha ${llamadoText}</label>
+                    <input type="date" class="form-input">
+                </div>
+                <div style="display: flex; align-items: end;">
+                    <button type="button" class="btn btn-danger btn-small" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            container.appendChild(finalDiv);
+        }
+
         // Calcular promedio de materia
         function calcularPromedioMateria(materia) {
             const notas = [];
             
+            // Agregar parciales
             if (materia.parcial1) notas.push(materia.parcial1);
             if (materia.parcial2) notas.push(materia.parcial2);
             if (materia.parcialesExtra) {
                 materia.parcialesExtra.forEach(parcial => notas.push(parcial));
             }
-            if (materia.final) notas.push(materia.final);
+            
+            // Agregar final (usar el último final aprobado o el campo legacy)
+            if (materia.finales && materia.finales.length > 0) {
+                const finalAprobado = materia.finales.find(f => f.nota >= 4);
+                if (finalAprobado) {
+                    notas.push(finalAprobado.nota);
+                }
+            } else if (materia.final && materia.final >= 4) {
+                notas.push(materia.final);
+            }
             
             if (notas.length === 0) return null;
             
@@ -1567,17 +1661,51 @@
 
         // Obtener estado de materia
         function obtenerEstadoMateria(materia, promedio) {
-            if (promedio === null) {
+            // Si no hay notas de parciales, está cursando
+            const tieneParciales = materia.parcial1 || materia.parcial2 || (materia.parcialesExtra && materia.parcialesExtra.length > 0);
+            if (!tieneParciales) {
                 return { texto: 'Cursando', clase: 'cursando' };
             }
             
-            if (promedio >= 4) {
-                return { texto: 'Aprobada', clase: 'aprobada' };
-            } else if (promedio >= 2) {
-                return { texto: 'Regular', clase: 'regular' };
-            } else {
+            // Calcular promedio de parciales solamente
+            const notasParciales = [];
+            if (materia.parcial1) notasParciales.push(materia.parcial1);
+            if (materia.parcial2) notasParciales.push(materia.parcial2);
+            if (materia.parcialesExtra) {
+                materia.parcialesExtra.forEach(parcial => notasParciales.push(parcial));
+            }
+            
+            const promedioParciales = notasParciales.length > 0 ? 
+                notasParciales.reduce((sum, nota) => sum + nota, 0) / notasParciales.length : 0;
+            
+            // Si el promedio de parciales es menor a 4, está libre
+            if (promedioParciales < 4) {
                 return { texto: 'Libre', clase: 'libre' };
             }
+            
+            // Si tiene finales registrados
+            if (materia.finales && materia.finales.length > 0) {
+                // Buscar si hay algún final aprobado (≥4)
+                const finalAprobado = materia.finales.find(f => f.nota >= 4);
+                if (finalAprobado) {
+                    return { texto: 'Aprobada', clase: 'aprobada' };
+                } else {
+                    // Si todos los finales están desaprobados, está regular
+                    return { texto: 'Regular', clase: 'regular' };
+                }
+            }
+            
+            // Si solo tiene final (campo legacy)
+            if (materia.final) {
+                if (materia.final >= 4) {
+                    return { texto: 'Aprobada', clase: 'aprobada' };
+                } else {
+                    return { texto: 'Regular', clase: 'regular' };
+                }
+            }
+            
+            // Si tiene parciales aprobados pero no final, está regular
+            return { texto: 'Regular', clase: 'regular' };
         }
 
         // Daily Motivational Quotes
@@ -1772,6 +1900,20 @@
                                                     <div class="nota-value">${parcial}</div>
                                                 </div>
                                             `).join('') : ''}
+                                            ${materia.finales ? materia.finales.map((final, index) => {
+                                                const llamadoText = final.llamado === 1 ? '1er Llamado' : 
+                                                                   final.llamado === 2 ? '2do Llamado' : 
+                                                                   final.llamado === 3 ? '3er Llamado' : 
+                                                                   `${final.llamado}° Llamado`;
+                                                const estadoFinal = final.nota >= 4 ? 'aprobado' : 'desaprobado';
+                                                return `
+                                                    <div class="nota-item ${estadoFinal === 'desaprobado' ? 'final-desaprobado' : ''}">
+                                                        <div class="nota-label">${llamadoText}</div>
+                                                        <div class="nota-value">${final.nota}</div>
+                                                        ${final.fecha ? `<div style="font-size: 0.6rem; color: #666;">${formatDate(final.fecha)}</div>` : ''}
+                                                    </div>
+                                                `;
+                                            }).join('') : ''}
                                             ${materia.final ? `
                                                 <div class="nota-item">
                                                     <div class="nota-label">Final</div>
@@ -1819,6 +1961,34 @@
                     parcialesExtra.push(parseFloat(input.value));
                 }
             });
+
+            // Recopilar finales
+            const finales = [];
+            
+            // Primer llamado
+            const final1Nota = document.getElementById('materiaFinal1').value;
+            const final1Fecha = document.getElementById('materiaFinalFecha1').value;
+            if (final1Nota) {
+                finales.push({
+                    llamado: 1,
+                    nota: parseFloat(final1Nota),
+                    fecha: final1Fecha || null
+                });
+            }
+
+            // Finales extra
+            const finalesExtraRows = document.querySelectorAll('#finalesExtra .form-row');
+            finalesExtraRows.forEach((row, index) => {
+                const notaInput = row.querySelector('input[type="number"]');
+                const fechaInput = row.querySelector('input[type="date"]');
+                if (notaInput && notaInput.value) {
+                    finales.push({
+                        llamado: index + 2,
+                        nota: parseFloat(notaInput.value),
+                        fecha: fechaInput ? fechaInput.value : null
+                    });
+                }
+            });
             
             const materia = {
                 id: generateId(),
@@ -1830,15 +2000,16 @@
                 parcial1: document.getElementById('materiaParcial1').value ? parseFloat(document.getElementById('materiaParcial1').value) : null,
                 parcial2: document.getElementById('materiaParcial2').value ? parseFloat(document.getElementById('materiaParcial2').value) : null,
                 parcialesExtra: parcialesExtra.length > 0 ? parcialesExtra : null,
-                final: document.getElementById('materiaFinal').value ? parseFloat(document.getElementById('materiaFinal').value) : null,
+                finales: finales.length > 0 ? finales : null,
                 comentarios: document.getElementById('materiaComentarios').value || ''
             };
 
             materias.push(materia);
             DataManager.set('materias', materias);
             
-            // Limpiar parciales extra
+            // Limpiar campos extra
             document.getElementById('parcialesExtra').innerHTML = '';
+            document.getElementById('finalesExtra').innerHTML = '';
             
             closeModal('materiaModal');
             loadMaterias();
@@ -1858,7 +2029,6 @@
             document.getElementById('editMateriaCorrelativa').value = materia.correlativaId || '';
             document.getElementById('editMateriaParcial1').value = materia.parcial1 || '';
             document.getElementById('editMateriaParcial2').value = materia.parcial2 || '';
-            document.getElementById('editMateriaFinal').value = materia.final || '';
             document.getElementById('editMateriaComentarios').value = materia.comentarios || '';
 
             // Cargar parciales extra
@@ -1884,6 +2054,48 @@
                 });
             }
 
+            // Cargar finales
+            document.getElementById('editMateriaFinal1').value = '';
+            document.getElementById('editMateriaFinalFecha1').value = '';
+            
+            const editFinalesExtra = document.getElementById('editFinalesExtra');
+            editFinalesExtra.innerHTML = '';
+
+            if (materia.finales) {
+                materia.finales.forEach((final, index) => {
+                    if (index === 0) {
+                        // Primer llamado
+                        document.getElementById('editMateriaFinal1').value = final.nota || '';
+                        document.getElementById('editMateriaFinalFecha1').value = final.fecha || '';
+                    } else {
+                        // Llamados adicionales
+                        const llamadoText = index + 1 === 2 ? '2do Llamado' : index + 1 === 3 ? '3er Llamado' : `${index + 1}° Llamado`;
+                        const finalDiv = document.createElement('div');
+                        finalDiv.className = 'form-row';
+                        finalDiv.style.marginTop = '10px';
+                        finalDiv.innerHTML = `
+                            <div class="form-group">
+                                <label class="form-label">${llamadoText} (1-10)</label>
+                                <input type="number" class="form-input" min="1" max="10" step="0.1" value="${final.nota || ''}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Fecha ${llamadoText}</label>
+                                <input type="date" class="form-input" value="${final.fecha || ''}">
+                            </div>
+                            <div style="display: flex; align-items: end;">
+                                <button type="button" class="btn btn-danger btn-small" onclick="this.parentElement.parentElement.remove()">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        editFinalesExtra.appendChild(finalDiv);
+                    }
+                });
+            } else if (materia.final) {
+                // Compatibilidad con el campo legacy
+                document.getElementById('editMateriaFinal1').value = materia.final;
+            }
+
             // Cargar correlativas disponibles
             loadCorrelativasDropdown('editMateriaCorrelativa', materia.id);
 
@@ -1907,6 +2119,34 @@
                 }
             });
 
+            // Recopilar finales del formulario de edición
+            const finales = [];
+            
+            // Primer llamado
+            const final1Nota = document.getElementById('editMateriaFinal1').value;
+            const final1Fecha = document.getElementById('editMateriaFinalFecha1').value;
+            if (final1Nota) {
+                finales.push({
+                    llamado: 1,
+                    nota: parseFloat(final1Nota),
+                    fecha: final1Fecha || null
+                });
+            }
+
+            // Finales extra
+            const finalesExtraRows = document.querySelectorAll('#editFinalesExtra .form-row');
+            finalesExtraRows.forEach((row, index) => {
+                const notaInput = row.querySelector('input[type="number"]');
+                const fechaInput = row.querySelector('input[type="date"]');
+                if (notaInput && notaInput.value) {
+                    finales.push({
+                        llamado: index + 2,
+                        nota: parseFloat(notaInput.value),
+                        fecha: fechaInput ? fechaInput.value : null
+                    });
+                }
+            });
+
             materias[materiaIndex] = {
                 ...materias[materiaIndex],
                 codigo: document.getElementById('editMateriaCodigo').value,
@@ -1917,14 +2157,15 @@
                 parcial1: document.getElementById('editMateriaParcial1').value ? parseFloat(document.getElementById('editMateriaParcial1').value) : null,
                 parcial2: document.getElementById('editMateriaParcial2').value ? parseFloat(document.getElementById('editMateriaParcial2').value) : null,
                 parcialesExtra: parcialesExtra.length > 0 ? parcialesExtra : null,
-                final: document.getElementById('editMateriaFinal').value ? parseFloat(document.getElementById('editMateriaFinal').value) : null,
+                finales: finales.length > 0 ? finales : null,
                 comentarios: document.getElementById('editMateriaComentarios').value || ''
             };
 
             DataManager.set('materias', materias);
             
-            // Limpiar parciales extra
+            // Limpiar campos extra
             document.getElementById('editParcialesExtra').innerHTML = '';
+            document.getElementById('editFinalesExtra').innerHTML = '';
             
             closeModal('editMateriaModal');
             loadMaterias();
@@ -2385,5 +2626,5 @@
         `;
         document.head.appendChild(style);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b17740709fe99e',t:'MTc1NDUxNDA0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b1c23f347aba6d',t:'MTc1NDUxNzEyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
