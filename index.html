@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión Académica UBP - Ingeniería Informática</title>
+    <title>Gestión Académica - Feli</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">   
+    <link rel="icon" type="image/png" href="https://img.icons8.com/external-glyph-geotatah/64/982036/external-academic-knowledge-management-glyph-glyph-geotatah.png">
+
+
+   
+
+    
     <style>
         :root {
-            --ubp-red: #a3223a;
-            --ubp-red-dark: #8b1e32;
-            --ubp-red-light: #c5394f;
+            ---red: #a3223a;
+            ---red-dark: #8b1e32;
+            ---red-light: #c5394f;
             --bg-light: #f8fafc;
             --text-dark: #1a202c;
             --text-gray: #4a5568;
@@ -38,7 +44,7 @@
         
         /* Header */
         .header {
-            background: linear-gradient(135deg, var(--ubp-red) 0%, var(--ubp-red-dark) 100%);
+            background: linear-gradient(135deg, var(---red) 0%, var(---red-dark) 100%);
             color: white;
             padding: 2rem 0;
             box-shadow: 0 4px 20px rgba(163, 34, 58, 0.3);
@@ -67,7 +73,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            color: var(--ubp-red);
+            color: var(---red);
         }
         
         .header-text h1 {
@@ -132,13 +138,13 @@
         }
         
         .nav-btn:hover {
-            background: var(--ubp-red);
+            background: var(---red);
             color: white;
             transform: translateY(-2px);
         }
         
         .nav-btn.active {
-            background: var(--ubp-red);
+            background: var(---red);
             color: white;
             box-shadow: 0 4px 15px rgba(163, 34, 58, 0.3);
         }
@@ -175,7 +181,7 @@
         }
         
         .section-title i {
-            color: var(--ubp-red);
+            color: var(---red);
         }
         
         /* Cards */
@@ -222,24 +228,24 @@
         }
         
         .btn-primary {
-            background: var(--ubp-red);
+            background: var(---red);
             color: white;
         }
         
         .btn-primary:hover {
-            background: var(--ubp-red-dark);
+            background: var(---red-dark);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(163, 34, 58, 0.3);
         }
         
         .btn-secondary {
             background: white;
-            color: var(--ubp-red);
-            border: 2px solid var(--ubp-red);
+            color: var(---red);
+            border: 2px solid var(---red);
         }
         
         .btn-secondary:hover {
-            background: var(--ubp-red);
+            background: var(---red);
             color: white;
         }
         
@@ -297,13 +303,13 @@
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(--ubp-red);
+            border-left: 4px solid var(---red);
         }
         
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--ubp-red);
+            color: var(---red);
             margin-bottom: 0.5rem;
         }
         
@@ -323,7 +329,7 @@
         }
         
         .progress-bar {
-            background: linear-gradient(90deg, var(--ubp-red), var(--ubp-red-light));
+            background: linear-gradient(90deg, var(---red), var(---red-light));
             height: 100%;
             transition: width 0.8s ease;
             display: flex;
@@ -357,7 +363,7 @@
         
         .form-input:focus {
             outline: none;
-            border-color: var(--ubp-red);
+            border-color: var(---red);
             box-shadow: 0 0 0 3px rgba(163, 34, 58, 0.1);
         }
         
@@ -415,7 +421,7 @@
         }
         
         .close-btn:hover {
-            color: var(--ubp-red);
+            color: var(---red);
         }
         
         /* Materia Card */
@@ -425,7 +431,7 @@
             padding: 1.5rem;
             margin-bottom: 1rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-left: 4px solid var(--ubp-red);
+            border-left: 4px solid var(---red);
             transition: all 0.3s ease;
         }
         
@@ -469,7 +475,7 @@
         .grade-value {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--ubp-red);
+            color: var(---red);
         }
         
         .grade-status {
@@ -582,7 +588,7 @@
         }
         
         .calendar-header {
-            background: var(--ubp-red);
+            background: var(---red);
             color: white;
             padding: 1rem;
             text-align: center;
@@ -617,7 +623,7 @@
         }
         
         .calendar-event {
-            background: var(--ubp-red);
+            background: var(---red);
             color: white;
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
@@ -737,7 +743,7 @@
                         <i class="fas fa-laptop-code"></i>
                     </div>
                     <div class="header-text">
-                        <h1>Gestión Académica UBP</h1>
+                        <h1>Gestión Académica </h1>
                         <p>Ingeniería Informática</p>
                     </div>
                 </div>
@@ -996,7 +1002,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">📊 Promedio Calculado</label>
-                        <input type="text" id="promedio-calculado" class="form-input" readonly style="background: var(--bg-light); font-weight: 600; color: var(--ubp-red);" placeholder="Se calcula automáticamente">
+                        <input type="text" id="promedio-calculado" class="form-input" readonly style="background: var(--bg-light); font-weight: 600; color: var(---red);" placeholder="Se calcula automáticamente">
                     </div>
                 </div>
                 <div class="form-group">
@@ -1350,7 +1356,7 @@
                 
                 html += `
                     <div style="margin-bottom: 2rem;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem; padding: 1rem; background: linear-gradient(135deg, var(--ubp-red), var(--ubp-red-dark)); color: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(163, 34, 58, 0.2);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem; padding: 1rem; background: linear-gradient(135deg, var(---red), var(---red-dark)); color: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(163, 34, 58, 0.2);">
                             <h3 style="margin: 0; font-size: 1.3rem; font-weight: 700;">
                                 <i class="fas fa-graduation-cap" style="margin-right: 0.5rem;"></i>
                                 ${tituloAño}
@@ -1375,7 +1381,7 @@
                                         ${materia.cuatrimestre ? (materia.cuatrimestre === 'anual' ? '📅 Anual' : `📅 ${materia.cuatrimestre}° Cuatrimestre`) : ''}
                                     </div>
                                     ${materia.correlativas && materia.correlativas.length > 0 ? `
-                                        <div style="font-size: 0.8rem; color: var(--ubp-red); margin-top: 0.25rem;">
+                                        <div style="font-size: 0.8rem; color: var(---red); margin-top: 0.25rem;">
                                             🔗 Correlativas: ${getCorrelativasNames(materia.correlativas)}
                                         </div>
                                     ` : ''}
@@ -1817,7 +1823,7 @@
                     promedioInput.style.color = promedio >= 4 ? '#38a169' : promedio >= 4 ? '#ed8936' : '#e53e3e';
                 } else {
                     promedioInput.value = '';
-                    promedioInput.style.color = 'var(--ubp-red)';
+                    promedioInput.style.color = 'var(---red)';
                 }
             }
         }
@@ -1889,7 +1895,7 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'Gestión Académica UBP.html';
+                a.download = 'Gestión Académica .html';
                 
                 // Trigger download
                 document.body.appendChild(a);
@@ -1955,7 +1961,7 @@
                     }
                     
                     .notification-info {
-                        background: linear-gradient(135deg, var(--ubp-red), var(--ubp-red-dark));
+                        background: linear-gradient(135deg, var(---red), var(---red-dark));
                         color: white;
                     }
                     
