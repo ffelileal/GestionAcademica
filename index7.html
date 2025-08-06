@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Académica UBP - Ingeniería Informática</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --ubp-red: #a3223a;
+            --ubp-red-dark: #8b1e32;
+            --ubp-red-light: #c5394f;
+            --bg-light: #f8fafc;
+            --text-dark: #1a202c;
+            --text-gray: #4a5568;
+            --border-light: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: white;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--ubp-red) 0%, var(--ubp-red-dark) 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px rgba(163, 34, 58, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--ubp-red);
+        }
+        
+        .header-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .header-text p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .motivational-section {
+            text-align: right;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .date {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .motivational-message {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: var(--bg-light);
+            color: var(--text-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-btn:hover {
+            background: var(--ubp-red);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.active {
+            background: var(--ubp-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(163, 34, 58, 0.3);
+        }
+        
+        /* Main Content */
+        .main {
+            padding: 2rem 0;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section-title i {
+            color: var(--ubp-red);
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 30px rgba(163, 34, 58, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: var(--ubp-red);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--ubp-red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(163, 34, 58, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--ubp-red);
+            border: 2px solid var(--ubp-red);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--ubp-red);
+            color: white;
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+        
+        .btn-danger {
+            background: #e53e3e;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c53030;
+        }
+        
+        .btn-success {
+            background: #38a169;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #2f855a;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--ubp-red);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ubp-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            background: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 20px;
+            margin: 1rem 0;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--ubp-red), var(--ubp-red-light));
+            height: 100%;
+            transition: width 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--ubp-red);
+            box-shadow: 0 0 0 3px rgba(163, 34, 58, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-gray);
+            padding: 0.5rem;
+        }
+        
+        .close-btn:hover {
+            color: var(--ubp-red);
+        }
+        
+        /* Materia Card */
+        .materia-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--ubp-red);
+            transition: all 0.3s ease;
+        }
+        
+        .materia-card:hover {
+            box-shadow: 0 8px 30px rgba(163, 34, 58, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .materia-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .materia-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .materia-code {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .materia-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .materia-grade {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .grade-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ubp-red);
+        }
+        
+        .grade-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-approved {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .status-in-progress {
+            background: #fed7aa;
+            color: #9c4221;
+        }
+        
+        .status-pending {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        /* Task Item */
+        .task-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+        
+        .task-item.completed {
+            opacity: 0.7;
+            text-decoration: line-through;
+            border-left-color: #38a169;
+        }
+        
+        .task-item.high-priority {
+            border-left-color: #e53e3e;
+            background: #fef5e7;
+        }
+        
+        .task-item.medium-priority {
+            border-left-color: #ed8936;
+            background: #fffaf0;
+        }
+        
+        .task-item.low-priority {
+            border-left-color: #38a169;
+            background: #f0fff4;
+        }
+        
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .task-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .task-meta {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        
+        .task-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .priority-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .priority-high {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .priority-medium {
+            background: #feebc8;
+            color: #c05621;
+        }
+        
+        .priority-low {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        /* Calendar */
+        .calendar {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .calendar-header {
+            background: var(--ubp-red);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        
+        .calendar-day-header {
+            background: var(--bg-light);
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-gray);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .calendar-cell {
+            min-height: 100px;
+            padding: 0.5rem;
+            border-right: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .calendar-cell:hover {
+            background: var(--bg-light);
+        }
+        
+        .calendar-event {
+            background: var(--ubp-red);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-gray);
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .empty-state p {
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .motivational-section {
+                text-align: center;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .materia-header,
+            .task-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .materia-actions,
+            .task-actions {
+                justify-content: flex-start;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Utilities */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .hidden { display: none; }
+        .flex { display: flex; }
+        .flex-1 { flex: 1; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-1 { gap: 0.5rem; }
+        .gap-2 { gap: 1rem; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>Gestión Académica UBP</h1>
+                        <p>Ingeniería Informática</p>
+                    </div>
+                </div>
+                <div class="motivational-section">
+                    <div class="date" id="current-date"></div>
+                    <div class="motivational-message" id="motivational-message"></div>
+                    <div style="font-size: 0.8rem; opacity: 0.8;">💪 ¡Tú puedes con todo!</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showSection('dashboard')">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </button>
+                <button class="nav-btn" onclick="showSection('materias')">
+                    <i class="fas fa-book"></i>
+                    Materias
+                </button>
+                <button class="nav-btn" onclick="showSection('tareas')">
+                    <i class="fas fa-tasks"></i>
+                    Tareas
+                </button>
+                <button class="nav-btn" onclick="showSection('horario')">
+                    <i class="fas fa-calendar"></i>
+                    Horario
+                </button>
+                <button class="nav-btn" onclick="generateShortcut()" title="Generar acceso directo al escritorio">
+                    <i class="fas fa-download"></i>
+                    Acceso Directo
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-chart-line"></i>
+                        Dashboard
+                    </h2>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-materias">0</div>
+                        <div class="stat-label">Total Materias</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="materias-aprobadas">0</div>
+                        <div class="stat-label">Materias Aprobadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="promedio-general">0.0</div>
+                        <div class="stat-label">Promedio General</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="tareas-pendientes">0</div>
+                        <div class="stat-label">Tareas Pendientes</div>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div class="card">
+                    <h3 class="card-title">Progreso de la Carrera</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar" style="width: 0%">0%</div>
+                    </div>
+                    <p id="progress-text">Comienza agregando tus materias para ver tu progreso</p>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card mt-2">
+                    <h3 class="card-title">Próximas Tareas</h3>
+                    <div id="upcoming-tasks">
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-list"></i>
+                            <h3>No hay tareas próximas</h3>
+                            <p>¡Perfecto momento para relajarse!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Materias Section -->
+            <section id="materias" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-book"></i>
+                        Mis Materias
+                    </h2>
+                    <button class="btn btn-primary" onclick="openMateriaModal()">
+                        <i class="fas fa-plus"></i>
+                        Agregar Materia
+                    </button>
+                </div>
+
+                <div id="materias-container">
+                    <div class="empty-state">
+                        <i class="fas fa-book-open"></i>
+                        <h3>No hay materias agregadas</h3>
+                        <p>¡Comienza agregando tu primera materia!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tareas Section -->
+            <section id="tareas" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-tasks"></i>
+                        Mis Tareas
+                    </h2>
+                    <div class="flex gap-1">
+                        <button class="btn btn-secondary btn-small" onclick="clearCompletedTasks()">
+                            <i class="fas fa-trash"></i>
+                            Limpiar Completadas
+                        </button>
+                        <button class="btn btn-primary" onclick="openTareaModal()">
+                            <i class="fas fa-plus"></i>
+                            Nueva Tarea
+                        </button>
+                    </div>
+                </div>
+
+                <div id="tareas-container">
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No hay tareas pendientes</h3>
+                        <p>¡Perfecto momento para relajarse!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Horario Section -->
+            <section id="horario" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-calendar"></i>
+                        Mi Horario
+                    </h2>
+                    <button class="btn btn-primary" onclick="openHorarioModal()">
+                        <i class="fas fa-plus"></i>
+                        Agregar Clase
+                    </button>
+                </div>
+
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <h3>Horario Semanal</h3>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Lunes</div>
+                        <div class="calendar-day-header">Martes</div>
+                        <div class="calendar-day-header">Miércoles</div>
+                        <div class="calendar-day-header">Jueves</div>
+                        <div class="calendar-day-header">Viernes</div>
+                        <div class="calendar-day-header">Sábado</div>
+                        <div class="calendar-day-header">Domingo</div>
+                        
+                        <!-- Time slots will be generated by JavaScript -->
+                        <div id="calendar-body"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Materia Modal -->
+    <div id="materiaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="materia-modal-title">Agregar Materia</h2>
+                <button class="close-btn" onclick="closeMateriaModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="materiaForm">
+                <input type="hidden" id="materia-id">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Código</label>
+                        <input type="text" id="materia-codigo" class="form-input" placeholder="Ej: INF101" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cantidad de Parciales</label>
+                        <select id="cantidad-parciales" class="form-input" onchange="updateParcialesInputs()">
+                            <option value="2">2 Parciales</option>
+                            <option value="3">3 Parciales</option>
+                            <option value="4">4 Parciales</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">📅 Año</label>
+                        <select id="materia-año" class="form-input" required>
+                            <option value="">Seleccionar año</option>
+                            <option value="1">1er Año</option>
+                            <option value="2">2do Año</option>
+                            <option value="3">3er Año</option>
+                            <option value="4">4to Año</option>
+                            <option value="5">5to Año</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">📚 Cuatrimestre</label>
+                        <select id="materia-cuatrimestre" class="form-input" required>
+                            <option value="">Seleccionar cuatrimestre</option>
+                            <option value="1">1er Cuatrimestre</option>
+                            <option value="2">2do Cuatrimestre</option>
+                            <option value="anual">Anual</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">🔗 Correlativas</label>
+                    <select id="materia-correlativas" class="form-input" multiple style="height: 100px;">
+                        <!-- Se llenarán dinámicamente -->
+                    </select>
+                    <small style="color: var(--text-gray); font-size: 0.8rem;">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples materias</small>
+                </div>
+                
+                <!-- Notas de Parciales -->
+                <div class="form-group">
+                    <label class="form-label">📝 Notas de Parciales (1-10)</label>
+                    <div id="parciales-container" class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" style="font-size: 0.9rem; color: var(--text-gray);">Parcial 1</label>
+                            <input type="number" id="parcial-1" class="form-input" min="1" max="10" step="0.1" placeholder="0.0" onchange="calculatePromedio()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" style="font-size: 0.9rem; color: var(--text-gray);">Parcial 2</label>
+                            <input type="number" id="parcial-2" class="form-input" min="1" max="10" step="0.1" placeholder="0.0" onchange="calculatePromedio()">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Nota Final -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">🎓 Nota Final (1-10)</label>
+                        <input type="number" id="nota-final" class="form-input" min="1" max="10" step="0.1" placeholder="0.0" onchange="calculatePromedio()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">📊 Promedio Calculado</label>
+                        <input type="text" id="promedio-calculado" class="form-input" readonly style="background: var(--bg-light); font-weight: 600; color: var(--ubp-red);" placeholder="Se calcula automáticamente">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre de la Materia</label>
+                    <input type="text" id="materia-nombre" class="form-input" placeholder="Ej: Programación I" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Comentarios</label>
+                    <textarea id="materia-comentarios" class="form-input" rows="3" placeholder="Notas adicionales sobre la materia..."></textarea>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <button type="submit" class="btn btn-primary flex-1">
+                        <i class="fas fa-save"></i>
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeMateriaModal()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tarea Modal -->
+    <div id="tareaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Nueva Tarea</h2>
+                <button class="close-btn" onclick="closeTareaModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="tareaForm">
+                <div class="form-group">
+                    <label class="form-label">Nombre de la Tarea</label>
+                    <input type="text" id="tarea-nombre" class="form-input" placeholder="Ej: Entrega TP1" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Materia</label>
+                        <select id="tarea-materia" class="form-input" required>
+                            <option value="">Seleccionar materia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Prioridad</label>
+                        <select id="tarea-prioridad" class="form-input" required>
+                            <option value="">Seleccionar prioridad</option>
+                            <option value="alta">🔴 Alta</option>
+                            <option value="media">🟡 Media</option>
+                            <option value="baja">🟢 Baja</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha Límite</label>
+                    <input type="datetime-local" id="tarea-fecha" class="form-input" required>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <button type="submit" class="btn btn-primary flex-1">
+                        <i class="fas fa-save"></i>
+                        Crear Tarea
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeTareaModal()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Horario Modal -->
+    <div id="horarioModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Agregar Clase</h2>
+                <button class="close-btn" onclick="closeHorarioModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="horarioForm">
+                <div class="form-group">
+                    <label class="form-label">Materia</label>
+                    <select id="horario-materia" class="form-input" required>
+                        <option value="">Seleccionar materia</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Día</label>
+                        <select id="horario-dia" class="form-input" required>
+                            <option value="">Seleccionar día</option>
+                            <option value="0">Lunes</option>
+                            <option value="1">Martes</option>
+                            <option value="2">Miércoles</option>
+                            <option value="3">Jueves</option>
+                            <option value="4">Viernes</option>
+                            <option value="5">Sábado</option>
+                            <option value="6">Domingo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Aula</label>
+                        <input type="text" id="horario-aula" class="form-input" placeholder="Ej: Aula 101">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Hora Inicio</label>
+                        <input type="time" id="horario-inicio" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Hora Fin</label>
+                        <input type="time" id="horario-fin" class="form-input" required>
+                    </div>
+                </div>
+                <div class="flex gap-2 mt-2">
+                    <button type="submit" class="btn btn-primary flex-1">
+                        <i class="fas fa-save"></i>
+                        Guardar
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeHorarioModal()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let materias = JSON.parse(localStorage.getItem('materias')) || [];
+        let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+        let horarios = JSON.parse(localStorage.getItem('horarios')) || [];
+        let editingMateriaId = null;
+
+        // Motivational messages by day of week
+        const mensajesMotivacionales = {
+            0: "¡Domingo de planificación! Prepárate para una semana exitosa 📅",
+            1: "¡Lunes de energía! Hoy podés con todo 💪",
+            2: "¡Martes de productividad! Cada línea de código cuenta 💻",
+            3: "¡Miércoles de persistencia! Estás a mitad de camino 🚀",
+            4: "¡Jueves de enfoque! El éxito está cerca 🎯",
+            5: "¡Viernes de logros! Celebra tu progreso semanal 🎉",
+            6: "¡Sábado de reflexión! Descansa y planifica el futuro 🌟"
+        };
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDateAndMessage();
+            renderMaterias();
+            renderTareas();
+            renderHorarios();
+            updateDashboard();
+            populateSelects();
+            initializeCalendar();
+        });
+
+        // Update date and motivational message
+        function updateDateAndMessage() {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const dateString = now.toLocaleDateString('es-ES', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            document.getElementById('current-date').textContent = dateString;
+            document.getElementById('motivational-message').textContent = mensajesMotivacionales[dayOfWeek];
+        }
+
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+
+        // Materias functions
+        function openMateriaModal(id = null) {
+            editingMateriaId = id;
+            const modal = document.getElementById('materiaModal');
+            const title = document.getElementById('materia-modal-title');
+            
+            if (id) {
+                const materia = materias.find(m => m.id === id);
+                title.textContent = 'Editar Materia';
+                document.getElementById('materia-id').value = id;
+                document.getElementById('materia-codigo').value = materia.codigo;
+                document.getElementById('materia-nombre').value = materia.nombre;
+                document.getElementById('materia-año').value = materia.año || '';
+                document.getElementById('materia-cuatrimestre').value = materia.cuatrimestre || '';
+                document.getElementById('materia-comentarios').value = materia.comentarios || '';
+                
+                // Configurar cantidad de parciales
+                document.getElementById('cantidad-parciales').value = materia.cantidadParciales || 2;
+                updateParcialesInputs();
+                
+                // Configurar correlativas
+                populateCorrelativasSelect();
+                if (materia.correlativas) {
+                    const correlativasSelect = document.getElementById('materia-correlativas');
+                    Array.from(correlativasSelect.options).forEach(option => {
+                        option.selected = materia.correlativas.includes(option.value);
+                    });
+                }
+                
+                // Llenar notas de parciales
+                if (materia.parciales) {
+                    materia.parciales.forEach((nota, index) => {
+                        const input = document.getElementById(`parcial-${index + 1}`);
+                        if (input) input.value = nota;
+                    });
+                }
+                
+                // Llenar nota final
+                document.getElementById('nota-final').value = materia.notaFinal || '';
+                
+                // Calcular promedio
+                calculatePromedio();
+            } else {
+                title.textContent = 'Agregar Materia';
+                document.getElementById('materiaForm').reset();
+                document.getElementById('materia-id').value = '';
+                document.getElementById('cantidad-parciales').value = '2';
+                updateParcialesInputs();
+                populateCorrelativasSelect();
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function closeMateriaModal() {
+            document.getElementById('materiaModal').style.display = 'none';
+            editingMateriaId = null;
+        }
+
+        document.getElementById('materiaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Recopilar notas de parciales
+            const cantidadParciales = parseInt(document.getElementById('cantidad-parciales').value);
+            const parciales = [];
+            for (let i = 1; i <= cantidadParciales; i++) {
+                const nota = parseFloat(document.getElementById(`parcial-${i}`).value);
+                if (!isNaN(nota) && nota > 0) {
+                    parciales.push(nota);
+                }
+            }
+            
+            const notaFinal = parseFloat(document.getElementById('nota-final').value) || null;
+            
+            // Obtener correlativas seleccionadas
+            const correlativasSelect = document.getElementById('materia-correlativas');
+            const correlativas = Array.from(correlativasSelect.selectedOptions).map(option => option.value);
+            
+            const materiaData = {
+                id: editingMateriaId || Date.now().toString(),
+                codigo: document.getElementById('materia-codigo').value,
+                nombre: document.getElementById('materia-nombre').value,
+                año: document.getElementById('materia-año').value,
+                cuatrimestre: document.getElementById('materia-cuatrimestre').value,
+                correlativas: correlativas,
+                cantidadParciales: cantidadParciales,
+                parciales: parciales,
+                notaFinal: notaFinal,
+                promedio: calculatePromedioFinal(parciales, notaFinal),
+                comentarios: document.getElementById('materia-comentarios').value,
+                fechaCreacion: editingMateriaId ? materias.find(m => m.id === editingMateriaId).fechaCreacion : new Date().toISOString()
+            };
+
+            if (editingMateriaId) {
+                const index = materias.findIndex(m => m.id === editingMateriaId);
+                materias[index] = materiaData;
+            } else {
+                materias.push(materiaData);
+            }
+
+            localStorage.setItem('materias', JSON.stringify(materias));
+            renderMaterias();
+            updateDashboard();
+            populateSelects();
+            closeMateriaModal();
+        });
+
+        function deleteMateria(id) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta materia?')) {
+                materias = materias.filter(m => m.id !== id);
+                localStorage.setItem('materias', JSON.stringify(materias));
+                renderMaterias();
+                updateDashboard();
+                populateSelects();
+            }
+        }
+
+        function renderMaterias() {
+            const container = document.getElementById('materias-container');
+            
+            if (materias.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-book-open"></i>
+                        <h3>No hay materias agregadas</h3>
+                        <p>¡Comienza agregando tu primera materia!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Agrupar materias por año
+            const materiasPorAño = {};
+            
+            materias.forEach(materia => {
+                const año = materia.año || 'sin-año';
+                if (!materiasPorAño[año]) {
+                    materiasPorAño[año] = [];
+                }
+                materiasPorAño[año].push(materia);
+            });
+
+            // Ordenar materias alfabéticamente dentro de cada año
+            Object.keys(materiasPorAño).forEach(año => {
+                materiasPorAño[año].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
+            });
+
+            let html = '';
+            
+            // Ordenar años (1, 2, 3, 4, 5, sin-año)
+            const añosOrdenados = Object.keys(materiasPorAño).sort((a, b) => {
+                if (a === 'sin-año') return 1;
+                if (b === 'sin-año') return -1;
+                return parseInt(a) - parseInt(b);
+            });
+
+            añosOrdenados.forEach(año => {
+                const materiasDelAño = materiasPorAño[año];
+                const tituloAño = año === 'sin-año' ? 'Sin Año Asignado' : `${año}° Año`;
+                
+                html += `
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem; padding: 1rem; background: linear-gradient(135deg, var(--ubp-red), var(--ubp-red-dark)); color: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(163, 34, 58, 0.2);">
+                            <h3 style="margin: 0; font-size: 1.3rem; font-weight: 700;">
+                                <i class="fas fa-graduation-cap" style="margin-right: 0.5rem;"></i>
+                                ${tituloAño}
+                            </h3>
+                            <div style="margin-left: auto; background: rgba(255, 255, 255, 0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;">
+                                ${materiasDelAño.length} materia${materiasDelAño.length !== 1 ? 's' : ''}
+                            </div>
+                        </div>
+                        <div style="display: grid; gap: 1rem;">
+                `;
+
+                materiasDelAño.forEach(materia => {
+                    const status = getGradeStatus(materia.promedio);
+                    
+                    html += `
+                        <div class="materia-card fade-in">
+                            <div class="materia-header">
+                                <div class="materia-info">
+                                    <h3>${materia.nombre}</h3>
+                                    <div class="materia-code">${materia.codigo}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-gray); margin-top: 0.25rem;">
+                                        ${materia.cuatrimestre ? (materia.cuatrimestre === 'anual' ? '📅 Anual' : `📅 ${materia.cuatrimestre}° Cuatrimestre`) : ''}
+                                    </div>
+                                    ${materia.correlativas && materia.correlativas.length > 0 ? `
+                                        <div style="font-size: 0.8rem; color: var(--ubp-red); margin-top: 0.25rem;">
+                                            🔗 Correlativas: ${getCorrelativasNames(materia.correlativas)}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                                <div class="materia-actions">
+                                    <button class="btn btn-small btn-secondary" onclick="openMateriaModal('${materia.id}')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-small btn-danger" onclick="deleteMateria('${materia.id}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="materia-grade">
+                                <div class="grade-value">${materia.promedio ? materia.promedio.toFixed(1) : '-'}</div>
+                                <div class="grade-status ${status.class}">${status.text}</div>
+                            </div>
+                            ${getNotasDetalle(materia)}
+                            ${materia.comentarios ? `<p style="color: var(--text-gray); font-size: 0.9rem;">${materia.comentarios}</p>` : ''}
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function getGradeStatus(promedio) {
+            if (!promedio || promedio === 0) {
+                return { class: 'status-pending', text: 'Pendiente' };
+            } else if (promedio >= 6) {
+                return { class: 'status-approved', text: 'Aprobada' };
+            } else {
+                return { class: 'status-in-progress', text: 'Cursando' };
+            }
+        }
+
+        // Tareas functions
+        function openTareaModal() {
+            document.getElementById('tareaModal').style.display = 'block';
+        }
+
+        function closeTareaModal() {
+            document.getElementById('tareaModal').style.display = 'none';
+            document.getElementById('tareaForm').reset();
+        }
+
+        document.getElementById('tareaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const tareaData = {
+                id: Date.now().toString(),
+                nombre: document.getElementById('tarea-nombre').value,
+                materiaId: document.getElementById('tarea-materia').value,
+                prioridad: document.getElementById('tarea-prioridad').value,
+                fechaLimite: document.getElementById('tarea-fecha').value,
+                completada: false,
+                fechaCreacion: new Date().toISOString()
+            };
+
+            tareas.push(tareaData);
+            localStorage.setItem('tareas', JSON.stringify(tareas));
+            renderTareas();
+            updateDashboard();
+            closeTareaModal();
+        });
+
+        function toggleTarea(id) {
+            const tarea = tareas.find(t => t.id === id);
+            if (tarea) {
+                tarea.completada = !tarea.completada;
+                localStorage.setItem('tareas', JSON.stringify(tareas));
+                renderTareas();
+                updateDashboard();
+            }
+        }
+
+        function deleteTarea(id) {
+            if (confirm('¿Eliminar esta tarea?')) {
+                tareas = tareas.filter(t => t.id !== id);
+                localStorage.setItem('tareas', JSON.stringify(tareas));
+                renderTareas();
+                updateDashboard();
+            }
+        }
+
+        function clearCompletedTasks() {
+            if (confirm('¿Eliminar todas las tareas completadas?')) {
+                tareas = tareas.filter(t => !t.completada);
+                localStorage.setItem('tareas', JSON.stringify(tareas));
+                renderTareas();
+                updateDashboard();
+            }
+        }
+
+        function renderTareas() {
+            const container = document.getElementById('tareas-container');
+            
+            if (tareas.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No hay tareas pendientes</h3>
+                        <p>¡Perfecto momento para relajarse!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            const tareasSorted = [...tareas].sort((a, b) => {
+                if (a.completada !== b.completada) return a.completada - b.completada;
+                return new Date(a.fechaLimite) - new Date(b.fechaLimite);
+            });
+
+            tareasSorted.forEach(tarea => {
+                const materia = materias.find(m => m.id === tarea.materiaId);
+                const fechaLimite = new Date(tarea.fechaLimite);
+                const priorityClass = `priority-${tarea.prioridad}`;
+                const taskClass = `task-item ${tarea.prioridad}-priority ${tarea.completada ? 'completed' : ''}`;
+
+                html += `
+                    <div class="${taskClass} fade-in">
+                        <div class="task-header">
+                            <div class="task-info">
+                                <h3>${tarea.nombre}</h3>
+                                <div class="task-meta">
+                                    ${materia ? materia.nombre : 'Sin materia'} • 
+                                    ${fechaLimite.toLocaleDateString('es-ES')} ${fechaLimite.toLocaleTimeString('es-ES', {hour: '2-digit', minute: '2-digit'})}
+                                </div>
+                            </div>
+                            <div class="task-actions">
+                                <div class="priority-badge ${priorityClass}">
+                                    ${tarea.prioridad === 'alta' ? '🔴' : tarea.prioridad === 'media' ? '🟡' : '🟢'}
+                                    ${tarea.prioridad.charAt(0).toUpperCase() + tarea.prioridad.slice(1)}
+                                </div>
+                                <input type="checkbox" ${tarea.completada ? 'checked' : ''} 
+                                       onchange="toggleTarea('${tarea.id}')" 
+                                       style="width: 20px; height: 20px; margin: 0 10px;">
+                                <button class="btn btn-small btn-danger" onclick="deleteTarea('${tarea.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Horario functions
+        function openHorarioModal() {
+            document.getElementById('horarioModal').style.display = 'block';
+        }
+
+        function closeHorarioModal() {
+            document.getElementById('horarioModal').style.display = 'none';
+            document.getElementById('horarioForm').reset();
+        }
+
+        document.getElementById('horarioForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const horarioData = {
+                id: Date.now().toString(),
+                materiaId: document.getElementById('horario-materia').value,
+                dia: parseInt(document.getElementById('horario-dia').value),
+                horaInicio: document.getElementById('horario-inicio').value,
+                horaFin: document.getElementById('horario-fin').value,
+                aula: document.getElementById('horario-aula').value
+            };
+
+            horarios.push(horarioData);
+            localStorage.setItem('horarios', JSON.stringify(horarios));
+            renderHorarios();
+            closeHorarioModal();
+        });
+
+        function deleteHorario(id) {
+            if (confirm('¿Eliminar esta clase?')) {
+                horarios = horarios.filter(h => h.id !== id);
+                localStorage.setItem('horarios', JSON.stringify(horarios));
+                renderHorarios();
+            }
+        }
+
+        function initializeCalendar() {
+            const calendarBody = document.getElementById('calendar-body');
+            const timeSlots = [];
+            
+            // Generate time slots from 8:00 to 22:00
+            for (let hour = 8; hour <= 22; hour++) {
+                timeSlots.push(`${hour.toString().padStart(2, '0')}:00`);
+            }
+
+            let html = '';
+            timeSlots.forEach(time => {
+                html += `
+                    <div class="calendar-cell" data-time="${time}" data-day="0"></div>
+                    <div class="calendar-cell" data-time="${time}" data-day="1"></div>
+                    <div class="calendar-cell" data-time="${time}" data-day="2"></div>
+                    <div class="calendar-cell" data-time="${time}" data-day="3"></div>
+                    <div class="calendar-cell" data-time="${time}" data-day="4"></div>
+                    <div class="calendar-cell" data-time="${time}" data-day="5"></div>
+                    <div class="calendar-cell" data-time="${time}" data-day="6"></div>
+                `;
+            });
+
+            calendarBody.innerHTML = html;
+        }
+
+        function renderHorarios() {
+            // Clear all calendar events
+            document.querySelectorAll('.calendar-event').forEach(event => event.remove());
+
+            horarios.forEach(horario => {
+                const materia = materias.find(m => m.id === horario.materiaId);
+                if (!materia) return;
+
+                const cell = document.querySelector(`[data-day="${horario.dia}"][data-time="${horario.horaInicio}"]`);
+                if (cell) {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.className = 'calendar-event';
+                    eventDiv.innerHTML = `
+                        <div style="font-weight: 600; margin-bottom: 2px;">${materia.nombre}</div>
+                        <div style="font-size: 0.7rem;">${horario.aula || ''}</div>
+                        <div style="font-size: 0.7rem;">${horario.horaInicio} - ${horario.horaFin}</div>
+                        <button onclick="deleteHorario('${horario.id}')" 
+                                style="position: absolute; top: 2px; right: 2px; background: none; border: none; color: white; cursor: pointer;">
+                            <i class="fas fa-times" style="font-size: 0.7rem;"></i>
+                        </button>
+                    `;
+                    eventDiv.style.position = 'relative';
+                    cell.appendChild(eventDiv);
+                }
+            });
+        }
+
+        // Dashboard functions
+        function updateDashboard() {
+            // Total materias
+            document.getElementById('total-materias').textContent = materias.length;
+
+            // Materias aprobadas
+            const materiasAprobadas = materias.filter(m => m.promedio >= 4).length;
+            document.getElementById('materias-aprobadas').textContent = materiasAprobadas;
+
+            // Promedio general
+            const materiasConPromedio = materias.filter(m => m.promedio > 0);
+            const promedio = materiasConPromedio.length > 0 
+                ? materiasConPromedio.reduce((sum, m) => sum + m.promedio, 0) / materiasConPromedio.length 
+                : 0;
+            document.getElementById('promedio-general').textContent = promedio.toFixed(1);
+
+            // Tareas pendientes
+            const tareasPendientes = tareas.filter(t => !t.completada).length;
+            document.getElementById('tareas-pendientes').textContent = tareasPendientes;
+
+            // Progress bar (assuming 50 total subjects for the degree)
+            const totalSubjects = 50;
+            const progressPercentage = materias.length > 0 ? Math.round((materiasAprobadas / totalSubjects) * 100) : 0;
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            progressBar.style.width = `${progressPercentage}%`;
+            progressBar.textContent = `${progressPercentage}%`;
+            
+            if (progressPercentage === 0) {
+                progressText.textContent = 'Comienza agregando tus materias para ver tu progreso';
+            } else if (progressPercentage < 20) {
+                progressText.textContent = '¡Excelente comienzo! Sigue así 💪';
+            } else if (progressPercentage < 50) {
+                progressText.textContent = '¡Vas por buen camino! Ya tienes una base sólida 🚀';
+            } else if (progressPercentage < 80) {
+                progressText.textContent = '¡Increíble progreso! Estás en la recta final 🎯';
+            } else {
+                progressText.textContent = '¡Casi graduado! El éxito está muy cerca 🎓';
+            }
+
+            // Update upcoming tasks
+            updateUpcomingTasks();
+        }
+
+        function updateUpcomingTasks() {
+            const container = document.getElementById('upcoming-tasks');
+            const upcomingTasks = tareas
+                .filter(t => !t.completada)
+                .sort((a, b) => new Date(a.fechaLimite) - new Date(b.fechaLimite))
+                .slice(0, 3);
+
+            if (upcomingTasks.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>No hay tareas próximas</h3>
+                        <p>¡Perfecto momento para relajarse!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            upcomingTasks.forEach(tarea => {
+                const materia = materias.find(m => m.id === tarea.materiaId);
+                const fechaLimite = new Date(tarea.fechaLimite);
+                const now = new Date();
+                const daysLeft = Math.ceil((fechaLimite - now) / (1000 * 60 * 60 * 24));
+
+                html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--bg-light); border-radius: 8px; margin-bottom: 0.5rem;">
+                        <div>
+                            <h4 style="font-weight: 600; margin-bottom: 0.25rem;">${tarea.nombre}</h4>
+                            <p style="color: var(--text-gray); font-size: 0.9rem;">${materia ? materia.nombre : 'Sin materia'}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 600; color: ${daysLeft <= 1 ? '#e53e3e' : daysLeft <= 3 ? '#ed8936' : 'var(--text-gray)'};">
+                                ${daysLeft <= 0 ? '¡Vencida!' : daysLeft === 1 ? 'Mañana' : `${daysLeft} días`}
+                            </div>
+                            <div class="priority-badge priority-${tarea.prioridad}" style="margin-top: 0.25rem;">
+                                ${tarea.prioridad}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Populate selects with materias
+        function populateSelects() {
+            const tareaSelect = document.getElementById('tarea-materia');
+            const horarioSelect = document.getElementById('horario-materia');
+
+            // Clear existing options (except first one)
+            tareaSelect.innerHTML = '<option value="">Seleccionar materia</option>';
+            horarioSelect.innerHTML = '<option value="">Seleccionar materia</option>';
+
+            materias.forEach(materia => {
+                const option1 = document.createElement('option');
+                option1.value = materia.id;
+                option1.textContent = `${materia.nombre} (${materia.codigo})`;
+                tareaSelect.appendChild(option1);
+
+                const option2 = document.createElement('option');
+                option2.value = materia.id;
+                option2.textContent = `${materia.nombre} (${materia.codigo})`;
+                horarioSelect.appendChild(option2);
+            });
+        }
+
+        // Populate correlativas select (excluding current materia)
+        function populateCorrelativasSelect() {
+            const correlativasSelect = document.getElementById('materia-correlativas');
+            const currentMateriaId = document.getElementById('materia-id').value;
+            
+            correlativasSelect.innerHTML = '';
+
+            materias.forEach(materia => {
+                if (materia.id !== currentMateriaId) {
+                    const option = document.createElement('option');
+                    option.value = materia.id;
+                    option.textContent = `${materia.nombre} (${materia.codigo})`;
+                    correlativasSelect.appendChild(option);
+                }
+            });
+        }
+
+        // Get correlativas names for display
+        function getCorrelativasNames(correlativasIds) {
+            if (!correlativasIds || correlativasIds.length === 0) return '';
+            
+            const nombres = correlativasIds.map(id => {
+                const materia = materias.find(m => m.id === id);
+                return materia ? materia.codigo : 'Materia eliminada';
+            });
+            
+            return nombres.join(', ');
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Helper functions for parciales system
+        function updateParcialesInputs() {
+            const cantidad = parseInt(document.getElementById('cantidad-parciales').value);
+            const container = document.getElementById('parciales-container');
+            
+            let html = '';
+            for (let i = 1; i <= cantidad; i++) {
+                html += `
+                    <div class="form-group">
+                        <label class="form-label" style="font-size: 0.9rem; color: var(--text-gray);">Parcial ${i}</label>
+                        <input type="number" id="parcial-${i}" class="form-input" min="1" max="10" step="0.1" placeholder="0.0" onchange="calculatePromedio()">
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+            calculatePromedio();
+        }
+
+        function calculatePromedio() {
+            const cantidadParciales = parseInt(document.getElementById('cantidad-parciales').value);
+            const parciales = [];
+            
+            // Recopilar notas de parciales
+            for (let i = 1; i <= cantidadParciales; i++) {
+                const input = document.getElementById(`parcial-${i}`);
+                if (input && input.value) {
+                    const nota = parseFloat(input.value);
+                    if (!isNaN(nota) && nota > 0) {
+                        parciales.push(nota);
+                    }
+                }
+            }
+            
+            const notaFinalInput = document.getElementById('nota-final');
+            const notaFinal = notaFinalInput && notaFinalInput.value ? parseFloat(notaFinalInput.value) : null;
+            
+            const promedio = calculatePromedioFinal(parciales, notaFinal);
+            const promedioInput = document.getElementById('promedio-calculado');
+            
+            if (promedioInput) {
+                if (promedio > 0) {
+                    promedioInput.value = promedio.toFixed(1);
+                    promedioInput.style.color = promedio >= 4 ? '#38a169' : promedio >= 4 ? '#ed8936' : '#e53e3e';
+                } else {
+                    promedioInput.value = '';
+                    promedioInput.style.color = 'var(--ubp-red)';
+                }
+            }
+        }
+
+        function calculatePromedioFinal(parciales, notaFinal) {
+            if (parciales.length === 0 && !notaFinal) return 0;
+            
+            let suma = 0;
+            let contador = 0;
+            
+            // Sumar parciales (peso 70%)
+            if (parciales.length > 0) {
+                const promedioParciales = parciales.reduce((sum, nota) => sum + nota, 0) / parciales.length;
+                suma += promedioParciales * 0.7;
+                contador += 0.7;
+            }
+            
+            // Sumar final (peso 30%)
+            if (notaFinal && notaFinal > 0) {
+                suma += notaFinal * 0.3;
+                contador += 0.3;
+            }
+            
+            return contador > 0 ? suma / contador : 0;
+        }
+
+        function getNotasDetalle(materia) {
+            if (!materia.parciales && !materia.notaFinal) return '';
+            
+            let html = '<div style="margin-top: 1rem; padding: 1rem; background: var(--bg-light); border-radius: 8px;">';
+            html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 0.5rem; font-size: 0.9rem;">';
+            
+            // Mostrar parciales
+            if (materia.parciales && materia.parciales.length > 0) {
+                materia.parciales.forEach((nota, index) => {
+                    html += `
+                        <div style="text-align: center;">
+                            <div style="color: var(--text-gray); font-size: 0.8rem;">P${index + 1}</div>
+                            <div style="font-weight: 600; color: ${nota >= 4 ? '#38a169' : '#e53e3e'};">${nota.toFixed(1)}</div>
+                        </div>
+                    `;
+                });
+            }
+            
+            // Mostrar final
+            if (materia.notaFinal) {
+                html += `
+                    <div style="text-align: center;">
+                        <div style="color: var(--text-gray); font-size: 0.8rem;">Final</div>
+                        <div style="font-weight: 600; color: ${materia.notaFinal >= 4 ? '#38a169' : '#e53e3e'};">${materia.notaFinal.toFixed(1)}</div>
+                    </div>
+                `;
+            }
+            
+            html += '</div></div>';
+            return html;
+        }
+
+        // Generate desktop shortcut
+        function generateShortcut() {
+            try {
+                // Create the HTML content for the shortcut file
+                const htmlContent = document.documentElement.outerHTML;
+                
+                // Create a blob with the HTML content
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                
+                // Create download link
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Gestión Académica UBP.html';
+                
+                // Trigger download
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                // Clean up
+                URL.revokeObjectURL(url);
+                
+                // Show success message
+                showNotification('¡Acceso directo generado! 🎉', 'El archivo se ha descargado. Guárdalo en tu escritorio para acceso rápido.', 'success');
+                
+            } catch (error) {
+                console.error('Error generating shortcut:', error);
+                showNotification('Error al generar acceso directo ❌', 'Hubo un problema al crear el archivo. Intenta nuevamente.', 'error');
+            }
+        }
+
+        // Show notification system
+        function showNotification(title, message, type = 'info') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-message">${message}</div>
+                    <button class="notification-close" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            // Add notification styles if not already present
+            if (!document.querySelector('#notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    .notification {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        z-index: 10000;
+                        max-width: 400px;
+                        border-radius: 12px;
+                        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+                        animation: slideInRight 0.3s ease-out;
+                        backdrop-filter: blur(10px);
+                    }
+                    
+                    .notification-success {
+                        background: linear-gradient(135deg, #38a169, #2f855a);
+                        color: white;
+                    }
+                    
+                    .notification-error {
+                        background: linear-gradient(135deg, #e53e3e, #c53030);
+                        color: white;
+                    }
+                    
+                    .notification-info {
+                        background: linear-gradient(135deg, var(--ubp-red), var(--ubp-red-dark));
+                        color: white;
+                    }
+                    
+                    .notification-content {
+                        padding: 1.5rem;
+                        position: relative;
+                    }
+                    
+                    .notification-title {
+                        font-weight: 700;
+                        font-size: 1.1rem;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    .notification-message {
+                        font-size: 0.9rem;
+                        opacity: 0.9;
+                        line-height: 1.4;
+                    }
+                    
+                    .notification-close {
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        background: none;
+                        border: none;
+                        color: white;
+                        cursor: pointer;
+                        padding: 5px;
+                        border-radius: 50%;
+                        transition: background-color 0.2s ease;
+                    }
+                    
+                    .notification-close:hover {
+                        background: rgba(255, 255, 255, 0.2);
+                    }
+                    
+                    @keyframes slideInRight {
+                        from {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                        to {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
+                    }
+                    
+                    @media (max-width: 768px) {
+                        .notification {
+                            top: 10px;
+                            right: 10px;
+                            left: 10px;
+                            max-width: none;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+        }
+
+        // Add PWA-like functionality for better desktop experience
+        function initializePWAFeatures() {
+            // Add to home screen prompt for mobile
+            let deferredPrompt;
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                
+                // Show install button or notification
+                showNotification(
+                    '📱 ¡Instalar App!', 
+                    'Puedes instalar esta aplicación en tu dispositivo para un acceso más rápido.',
+                    'info'
+                );
+            });
+            
+            // Handle app installation
+            window.addEventListener('appinstalled', () => {
+                showNotification(
+                    '✅ ¡Instalado!', 
+                    'La aplicación se ha instalado correctamente en tu dispositivo.',
+                    'success'
+                );
+                deferredPrompt = null;
+            });
+        }
+
+        // Update motivational message at midnight
+        setInterval(function() {
+            const now = new Date();
+            if (now.getHours() === 0 && now.getMinutes() === 0) {
+                updateDateAndMessage();
+            }
+        }, 60000);
+
+        // Initialize PWA features when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePWAFeatures();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ab1cd4336dd841',t:'MTc1NDQ0NzQzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
